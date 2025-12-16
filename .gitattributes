@@ -1,3 +1,4 @@
+data/crustal_3d/train/*.npz filter=lfs diff=lfs merge=lfs -text
 data/crustal_3d/train/*npz filter=lfs diff=lfs merge=lfs -text
 data/**/*npz filter=lfs diff=lfs merge=lfs -text
 data/**/*mat filter=lfs diff=lfs merge=lfs -text

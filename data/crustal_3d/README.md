@@ -1,0 +1,7 @@
+# 3D Crustal Wavefield Dataset
+
+The 3D Crustal Wavefield Dataset is an extension of the curated datasets from [1]. It comprises synthetic 3D seismic wavefields in a heterogeneous 3D crustal model. Earthquakes were modeled as point sources with a double-couple mechanism represented by six parameters; source location and focal mechanism (strike, dip, and rake angle) were drawn at random within the model volume. The modeled spatial and temporal scales are relevant for seismic analysis of crustal earthquakes that can pose substantial risk to people and infrastructure when they occur in populated areas. Each simulation yields three-component velocity seismograms on a $32\times32\times32$ heterogeneous grid. Virtual sensors form a $94\times94$ grid arranged on top of the model volume with 100m spacing. These seismograms are sampled for 6 seconds at 50Hz.
+
+For tasks $E_{1}$-$E_{10}$, the velocity seismograms, virtual sensors, and point sources are provided, yielding $62451$ data points per timestep. For tasks $E_{11}$-$E_{12}$ only the velocity seismograms are provided, yielding $26508$ data points per timestep.
+
+[1] Lehmann, Fanny, et al. "Synthetic ground motions in heterogeneous geologies from various sources: the HEMEW S-3D database." Earth System Science Data 16.9 (2024): 3949-3972.

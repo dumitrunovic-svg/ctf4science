@@ -6,14 +6,16 @@ This document summarizes the core datasets used in the CTF for Science framework
 
 ## Dataset Summary Table
 
-| Name             | Type            | Delta t | Spatial Dim | Long-Time Eval       | Visualizations           |
-| ---------------- | --------------- | ------- | ----------- | -------------------- | ------------------------ |
-| ODE\_Lorenz      | Dynamical       | 0.05    | 3           | histogram\_L2\_error | trajectories, histograms |
-| PDE\_KS          | Spatio-temporal | 0.025   | 1024        | spectral\_L2\_error  | psd                      |
-| Lorenz\_Official | Dynamical       | 0.05    | 3           | histogram\_L2\_error | trajectories, histograms |
-| KS\_Official     | Spatio-temporal | 0.025   | 1024        | spectral\_L2\_error  | psd, 2d\_comparison      |
-| seismo           | Spatio-temporal | 1.0     | 2048        | spectral\_L2\_error  | psd, 2d\_comparison      |
-| ocean\_das       | Spatio-temporal | 1.0     | 3000        | spectral\_L2\_error  | psd, 2d\_comparison      |
+| Name             | Type            | Delta t | Spatial Dim  | Long-Time Eval       | Visualizations           |
+| ---------------- | --------------- | ------- | -----------  | -------------------- | ------------------------ |
+| ODE\_Lorenz      | Dynamical       | 0.05    | 3            | histogram\_L2\_error | trajectories, histograms |
+| PDE\_KS          | Spatio-temporal | 0.025   | 1024         | spectral\_L2\_error  | psd                      |
+| Lorenz\_Official | Dynamical       | 0.05    | 3            | histogram\_L2\_error | trajectories, histograms |
+| KS\_Official     | Spatio-temporal | 0.025   | 1024         | spectral\_L2\_error  | psd, 2d\_comparison      |
+| sst              | Spatio-temporal | 1.0     | 90601        | spectral\_L2\_error  | psd, 2d\_comparison      |
+| seismo           | Spatio-temporal | 1.0     | 2048         | spectral\_L2\_error  | psd, 2d\_comparison      |
+| ocean\_das       | Spatio-temporal | 1.0     | 3000         | spectral\_L2\_error  | psd, 2d\_comparison      |
+| crustal_3d       | Spatio-temporal | 1.0     | 62451, 26508 | spectral\_L2\_error  | psd, 2d\_comparison      |
 
 ---
 
@@ -104,7 +106,7 @@ A spatio-temporal dataset of synthetic seismic waveforms generated using the Ins
   * ID 8: E11 (short\_time)
   * ID 9: E12 (short\_time)
 
-## ocean-das
+## ocean_das
 
 A spatio-temporal dataset using a novel geophysical sensing technology called DAS (Distributed Acoustic Sensing). This dataset is comprised of data from a shallow offshore DAS about 30m below sea level where surface gravity waves are particularly dispersive. The data is sampled at 5Hz but low-pass filtered to 1Hz.
 
@@ -112,7 +114,29 @@ A spatio-temporal dataset using a novel geophysical sensing technology called DA
 * **Spatial dimension**: 3000
 * **Evaluation**: spectral L2 error for long-term behavior
 * **Data characteristics**:
-  * TODO
+  * Real-world sensor measurements measuring acoustic frequency strain signals.
+* **Relevant metrics**:
+
+  * ID 1: E1 (short\_time), E2 (long\_time)
+  * ID 2: E3 (reconstruction)
+  * ID 3: E4 (long\_time)
+  * ID 4: E5 (reconstruction)
+  * ID 5: E6 (long\_time)
+  * ID 6: E7, E8 (short\_time, long\_time)
+  * ID 7: E9, E10 (short\_time, long\_time)
+  * ID 8: E11 (short\_time)
+  * ID 9: E12 (short\_time)
+
+## crustal_3d
+
+A spatio-temporal from synthetic 3D seismic wavefields in a heterogeneous 3D crustal model. Each simulation yields three-component velocity seismograms on a $32\times32\times32$ heterogeneous grid. Virtual sensors form a $94\times94$ grid arranged on top of the model volume with 100m spacing. These seismograms are sampled for 6 seconds at 50Hz.
+
+* **Time step**: 1.0
+* **Spatial dimension**: 62451, 26508
+* **Evaluation**: spectral L2 error for long-term behavior
+* **Data characteristics**:
+  * For tasks $E_{1}$-$E_{10}$, the velocity seismograms, virtual sensors, and point sources are provided, yielding $62451$ data points per timestep. For tasks $E_{11}$-$E_{12}$ only the velocity seismograms are provided, yielding $26508$ data points per timestep.
+
 * **Relevant metrics**:
 
   * ID 1: E1 (short\_time), E2 (long\_time)
