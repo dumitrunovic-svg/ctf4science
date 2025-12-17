@@ -111,6 +111,31 @@ Check out the Dynamic AI Institute [Kaggle Page](https://www.kaggle.com/organiza
 - [Weak baselines and reporting biases lead to over-optimism in machine learning for fluid-related partial differential equations](https://www.nature.com/articles/s42256-024-00897-5)
 - [The Well: Dynamic System Dataset & Benchmarking](https://polymathic-ai.org/the_well)
 
+## Citations
+
+If you used our package in your work, please cite:
+
+```bibtex
+@article{wydercommon,
+  title={Common Task Framework For a Critical Evaluation of Scientific Machine Learning Algorithms},
+  author={Wyder, Philippe Martin and Goldfeder, Judah and Yermakov, Alexey and Zhao, Yue and Riva, Stefano and Williams, Jan P and Zoro, David and Rude, Amy Sara and Tomasetto, Matteo and Germany, Joe and Maierhofer, Georg and Cranmer, Miles and Kutz, J. Nathan},
+  journal={Advances in Neural Information Processing Systems},
+  year={2025}
+}
+```
+
+If you used our data, please also cite:
+
+```bibtex
+@misc{Kutz,
+    author={Yermakov, Alexey and Zhao, Yue and Denolle, Marine and Ni, Yiyu and Wyder, Philippe Martin and Goldfeder, Judah and Riva, Stefano and Williams, Jan P and Zoro, David and Rude, Amy Sara and Tomasetto, Matteo and Germany, Joe and Maierhofer, Georg and Cranmer, Miles and Kutz, J. Nathan},
+    year = {2025},
+    publisher = {Open Science Framework},
+    doi = {todo after OSF is public},
+    url = {todo after OSF is public}
+}
+```
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. This license only covers the ctf4science package. All models linked as submodules are subject to their respective license.
