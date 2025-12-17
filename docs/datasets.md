@@ -9,7 +9,7 @@ This document summarizes the core datasets used in the CTF for Science framework
 | Name             | Type            | Delta t | Spatial Dim  | Long-Time Eval       | Visualizations           |
 | ---------------- | --------------- | ------- | -----------  | -------------------- | ------------------------ |
 | ODE\_Lorenz      | Dynamical       | 0.05    | 3            | histogram\_L2\_error | trajectories, histograms |
-| PDE\_KS          | Spatio-temporal | 0.025   | 1024         | spectral\_L2\_error  | psd                      |
+| PDE\_KS          | Spatio-temporal | 0.025   | 1024         | spectral\_L2\_error  | psd, 2d\_comparison      |
 | Lorenz\_Official | Dynamical       | 0.05    | 3            | histogram\_L2\_error | trajectories, histograms |
 | KS\_Official     | Spatio-temporal | 0.025   | 1024         | spectral\_L2\_error  | psd, 2d\_comparison      |
 | sst              | Spatio-temporal | 1.0     | 90601        | spectral\_L2\_error  | psd, 2d\_comparison      |
