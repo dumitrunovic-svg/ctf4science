@@ -1,5 +1,14 @@
 data/crustal_3d/train/*.npz filter=lfs diff=lfs merge=lfs -text
-data/crustal_3d/train/*npz filter=lfs diff=lfs merge=lfs -text
+data/ocean_das/train/*.npz filter=lfs diff=lfs merge=lfs -text
+data/seismo/train/*.npz filter=lfs diff=lfs merge=lfs -text
+data/sst/train/*.npy filter=lfs diff=lfs merge=lfs -text
+data/ODE_Lorenz/train/*.mat filter=lfs diff=lfs merge=lfs -text
+data/ODE_Lorenz/test/*.mat filter=lfs diff=lfs merge=lfs -text
+data/Lorenz_Official/train/*.mat filter=lfs diff=lfs merge=lfs -text
+data/PDE_KS/train/*.mat filter=lfs diff=lfs merge=lfs -text
+data/PDE_KS/test/*.mat filter=lfs diff=lfs merge=lfs -text
+data/KS_Official/train/*.mat filter=lfs diff=lfs merge=lfs -text
+
 data/**/*npz filter=lfs diff=lfs merge=lfs -text
 data/**/*mat filter=lfs diff=lfs merge=lfs -text
 data/**/*npy filter=lfs diff=lfs merge=lfs -text

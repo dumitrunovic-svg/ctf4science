@@ -226,6 +226,26 @@ def _load_mat_file(file_path: Path) -> np.ndarray:
 
     return mat_data[keys[0]]
 
+def _load_npy_file(file_path: Path) -> np.ndarray:
+    """
+    Load a .npy file and return its content as a numpy array.
+
+    This function checks if the specified .npy file exists, loads it, and returns the array.
+
+    Args:
+        file_path (Path): Path to the .npy file.
+
+    Returns:
+        np.ndarray: The array from the .npy file.
+
+    Raises:
+        FileNotFoundError: If the .npy file does not exist.
+    """
+    if not file_path.exists():
+        raise FileNotFoundError(f"Dataset file not found: {file_path}")
+
+    return np.load(str(file_path))
+
 def _load_npz_file(file_path: Path) -> np.ndarray:
     """
     Load a .npz file and extract the single main variable.
@@ -273,6 +293,8 @@ def _load_data_file(file_path: Path) -> np.ndarray:
         return _load_npz_file(file_path)
     elif file_path.suffix == '.mat':
         return _load_mat_file(file_path)
+    elif file_path.suffix == '.npy':
+        return _load_npy_file(file_path)
     else:
         raise ValueError(f"Unsupported file format: {file_path.suffix}. Only .mat and .npz files are supported.")
 
