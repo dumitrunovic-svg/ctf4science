@@ -3,16 +3,15 @@
 This dataset contains **Global Sea Surface Temperature (SST)** data from NASA's Group for High Resolution Sea Surface Temperature (GHRSST) product. SST data exhibits complex, multiscale features of turbulent flows with intermittent events and quasi-periodic behavior, making it a challenging benchmark for forecasting, reconstruction, and prediction tasks. Unlike the synthetic KS and Lorenz datasets, this represents real-world geophysical observations, providing a critical testbed for evaluating data-driven methods on actual scientific data.
 
 #### Table of Contents
-1. [Dataset Description](#description)
-2. [Loading Data](#loading)
-3. [Memory Management Strategies](#memory_management)
-4. [Evaluation Tasks](#evaluation)
-5. [Physical Characteristics](#characteristics)
-6. [Usage Notes](#usage)
-7. [Relevant Sources](#sources)
+1. [Dataset Description](#dataset-description)
+2. [Loading Data](#loading-data)
+3. [Memory Management Strategies](#memory-management-strategies)
+4. [Evaluation Tasks](#evaluation-tasks)
+5. [Physical Characteristics](#physical-characteristics)
+6. [Usage Notes](#usage-notes)
+7. [Relevant Sources](#relevant-sources)
 
 ---
-<a name="description" />
 
 ## Dataset Description
 
@@ -63,8 +62,6 @@ This dataset is part of the **Common Task Framework (CTF) for Science**, designe
   - Long-term: Power Spectral Density matching with k=20, modes=100
 - **Data Source**: NASA GHRSST via PO.DAAC (spatial-temporal patches with undisclosed coordinates)
 
-<a name="loading" />
-
 ## Loading Data
 
 ### Python Example (NumPy)
@@ -104,8 +101,6 @@ print(f"Time range: [{timesteps[0]:.1f}, {timesteps[-1]:.1f}]")
 df = pd.read_csv('SST/csv/train/X1train.csv', header=None)
 ```
 
-<a name="memory_management" />
-
 ## Memory Management Strategies
 
 Given the large data size, consider these approaches:
@@ -137,8 +132,6 @@ batch = X1_train[i:i+batch_size, :]
 X1_train_f32 = X1_train.astype(np.float32) # Halves memory usage
 ```
 
-<a name="evaluation" />
-
 ## Evaluation Tasks
 
 The dataset supports 12 evaluation metrics (E1-E12) organized into 4 main task categories:
@@ -169,8 +162,6 @@ Input: Three training trajectories (X6, X7, X8) at different spatial/temporal co
 Task: Interpolate (E11) and extrapolate (E12) to new conditions
 Burn-in: X9train and X10train provide initialization (100 timesteps each)
 Metrics: Short-term RMSE on spatial/temporal generalization
-
-<a name="characteristics" />
 
 ## Physical Characteristics
 
@@ -204,8 +195,6 @@ The data represents a flattened spatial field:
 - Spatial resolution: Δx, Δy (undisclosed)
 - Geographic coordinates: Undisclosed to prevent external data usage
 
-<a name="usage" />
-
 ## Usage Notes
 
 1. Test Data Withheld: Test data files (.npy) are not included in the public dataset. Only test timesteps are provided. Submit predictions to the CTF4Science platform for evaluation.
@@ -218,8 +207,6 @@ The data represents a flattened spatial field:
 8. Data Continuity: Start indices in YAML indicate temporal relationship between train/test splits
 9. Memory Management: Consider memory-mapped arrays or batch processing for large files
 10. Multiscale Features: Methods must handle energy across multiple spatial and temporal scales
-
-<a name="sources" />
 
 ## Relevant Sources
 
