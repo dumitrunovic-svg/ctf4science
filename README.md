@@ -124,15 +124,30 @@ If you used our package in your work, please cite:
 }
 ```
 
+and
+
+```bibtex
+@misc{yermakov2025seismicwavefieldcommontask,
+      title={The Seismic Wavefield Common Task Framework}, 
+      author={Alexey Yermakov and Yue Zhao and Marine Denolle and Yiyu Ni and Philippe M. Wyder and Judah Goldfeder and Stefano Riva and Jan Williams and David Zoro and Amy Sara Rude and Matteo Tomasetto and Joe Germany and Joseph Bakarji and Georg Maierhofer and Miles Cranmer and J. Nathan Kutz},
+      year={2025},
+      eprint={2512.19927},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2512.19927}, 
+}
+```
+
 If you used our data, please also cite:
 
 ```bibtex
 @misc{Kutz,
     author={Yermakov, Alexey and Zhao, Yue and Denolle, Marine and Ni, Yiyu and Wyder, Philippe Martin and Goldfeder, Judah and Riva, Stefano and Williams, Jan P and Zoro, David and Rude, Amy Sara and Tomasetto, Matteo and Germany, Joe and Maierhofer, Georg and Cranmer, Miles and Kutz, J. Nathan},
-    year = {2025},
-    publisher = {Open Science Framework},
-    doi = {todo after OSF is public},
-    url = {todo after OSF is public}
+    title={ctf4science},
+    year={2025},
+    doi={10.17605/OSF.IO/6RZHM},
+    url={https://osf.io/6rzhm},
+    note={Open Science Framework project}
 }
 ```
 
