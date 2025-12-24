@@ -141,7 +141,7 @@ and
 If you used our data, please also cite:
 
 ```bibtex
-@misc{Kutz,
+@misc{ctf4science_osf,
     author={Yermakov, Alexey and Zhao, Yue and Denolle, Marine and Ni, Yiyu and Wyder, Philippe Martin and Goldfeder, Judah and Riva, Stefano and Williams, Jan P and Zoro, David and Rude, Amy Sara and Tomasetto, Matteo and Germany, Joe and Maierhofer, Georg and Cranmer, Miles and Kutz, J. Nathan},
     title={ctf4science},
     year={2025},
