@@ -51,6 +51,9 @@ Using HTTPS (requires GitHub authentication):
 git clone --recursive https://github.com/CTF-for-Science/ctf4science.git
 ```
 
+### Download the Data
+Please visit our Open Science Framework [page](https://osf.io/6rzhm/overview) to download all datasets. Each dataset can be extracted by running `tar -xzvf {dataset.tar.gz}`. Place the datasets in a top-level `data/` directory.
+
 ### Install the Repository and run an example
 ```bash
 git clone --recurse-submodules https://github.com/CTF-for-Science/ctf4science.git
@@ -88,6 +91,7 @@ To install and start using the framework, follow the instructions in [docs/getti
 
 ## Directory Structure
 
+- `data/`: Contains datasets from our [OSF page](https://osf.io/6rzhm/overview).
 - `models/`: Contains model implementations (e.g., baselines and user-contributed models).
 - `results/`: Stores model predictions, evaluation results, and visualizations.
 - `docs/`: Additional documentation (e.g., contributing, configuration).
