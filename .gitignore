@@ -186,3 +186,4 @@ lightning_logs/
 notebooks/*.csv
 notebooks/*.pdf
 notebooks/*.tex
+data/
