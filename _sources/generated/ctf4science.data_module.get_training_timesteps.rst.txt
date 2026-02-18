@@ -1,0 +1,11 @@
+
+
+ctf4science.data\_module.get\_training\_timesteps
+=================================================
+
+.. currentmodule:: ctf4science.data_module
+
+
+
+.. autofunction:: ctf4science.data_module.get_training_timesteps
+

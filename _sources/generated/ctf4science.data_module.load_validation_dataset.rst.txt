@@ -1,0 +1,11 @@
+
+
+ctf4science.data\_module.load\_validation\_dataset
+==================================================
+
+.. currentmodule:: ctf4science.data_module
+
+
+
+.. autofunction:: ctf4science.data_module.load_validation_dataset
+

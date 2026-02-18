@@ -1,0 +1,11 @@
+
+
+ctf4science.eval\_module.short\_time\_forecast
+==============================================
+
+.. currentmodule:: ctf4science.eval_module
+
+
+
+.. autofunction:: ctf4science.eval_module.short_time_forecast
+

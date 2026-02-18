@@ -1,0 +1,11 @@
+
+
+ctf4science.performance\_module.measure\_time
+=============================================
+
+.. currentmodule:: ctf4science.performance_module
+
+
+
+.. autofunction:: ctf4science.performance_module.measure_time
+

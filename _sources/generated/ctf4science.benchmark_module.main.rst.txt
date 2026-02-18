@@ -1,0 +1,11 @@
+
+
+ctf4science.benchmark\_module.main
+==================================
+
+.. currentmodule:: ctf4science.benchmark_module
+
+
+
+.. autofunction:: ctf4science.benchmark_module.main
+

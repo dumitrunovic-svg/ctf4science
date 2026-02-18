@@ -1,0 +1,24 @@
+﻿ctf4science
+===========
+
+.. automodule:: ctf4science
+
+   
+
+
+
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   benchmark_module
+   data_module
+   eval_module
+   performance_module
+   tune_module
+   visualization_module

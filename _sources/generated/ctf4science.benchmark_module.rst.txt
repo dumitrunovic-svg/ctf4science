@@ -1,0 +1,25 @@
+ctf4science.benchmark\_module
+=============================
+
+.. automodule:: ctf4science.benchmark_module
+
+   
+
+
+
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      main
+
+
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      ModelBenchmarker
+

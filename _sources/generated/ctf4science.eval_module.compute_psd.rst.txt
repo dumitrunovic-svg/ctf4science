@@ -1,0 +1,11 @@
+
+
+ctf4science.eval\_module.compute\_psd
+=====================================
+
+.. currentmodule:: ctf4science.eval_module
+
+
+
+.. autofunction:: ctf4science.eval_module.compute_psd
+

@@ -1,0 +1,10 @@
+ctf4science.benchmark\_module.ModelBenchmarker
+==============================================
+
+.. currentmodule:: ctf4science.benchmark_module
+
+.. autoclass:: ModelBenchmarker
+
+    
+
+    

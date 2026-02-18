@@ -1,0 +1,27 @@
+ctf4science.data\_module
+========================
+
+.. automodule:: ctf4science.data_module
+
+   
+
+
+
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      get_applicable_plots
+      get_config
+      get_metadata
+      get_prediction_timesteps
+      get_training_timesteps
+      get_validation_prediction_timesteps
+      get_validation_training_timesteps
+      load_dataset
+      load_validation_dataset
+      parse_pair_ids
+
+
+

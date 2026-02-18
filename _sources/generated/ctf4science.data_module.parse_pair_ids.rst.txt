@@ -1,0 +1,11 @@
+
+
+ctf4science.data\_module.parse\_pair\_ids
+=========================================
+
+.. currentmodule:: ctf4science.data_module
+
+
+
+.. autofunction:: ctf4science.data_module.parse_pair_ids
+

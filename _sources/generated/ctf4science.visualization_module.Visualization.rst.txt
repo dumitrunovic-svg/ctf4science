@@ -1,0 +1,10 @@
+ctf4science.visualization\_module.Visualization
+===============================================
+
+.. currentmodule:: ctf4science.visualization_module
+
+.. autoclass:: Visualization
+
+    
+
+    

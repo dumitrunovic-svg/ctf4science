@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Evaluation Module &#8212; CTF for Science Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'evaluation_module';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Performance Module" href="performance_module.html" />
+    <link rel="prev" title="Benchmark Module" href="benchmark_module.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CTF for Science Documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="evaluation_metrics.html">
+    Evaluation Metrics
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    Modules
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="datasets.html">
+    Datasets
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="api.html">
+    API
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="evaluation_metrics.html">
+    Evaluation Metrics
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="modules.html">
+    Modules
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="datasets.html">
+    Datasets
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="configuration.html">
+    Configuration
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="benchmark_module.html">Benchmark Module</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tune_module.html">Tune Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization_module.html">Visualization Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_module.html">Data Module</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">Modules</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Evaluation Module</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="evaluation-module">
+<h1>Evaluation Module<a class="headerlink" href="#evaluation-module" title="Link to this heading">#</a></h1>
+<p>This document explains how the <code class="docutils literal notranslate"><span class="pre">eval_module</span></code> of the CTF for Science framework is structured and used. It includes metrics definitions, evaluation routines, and batch results handling.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The evaluation module provides tools to:</p>
+<ul class="simple">
+<li><p>Compute metrics such as:</p>
+<ul>
+<li><p><strong>Short-time forecast accuracy</strong></p></li>
+<li><p><strong>Reconstruction accuracy</strong></p></li>
+<li><p><strong>Long-time behavior accuracy</strong> using:</p>
+<ul>
+<li><p>Histogram comparisons (for ODEs)</p></li>
+<li><p>Spectral analysis (for PDEs)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Extract metrics in a consistent order across sub-datasets</p></li>
+<li><p>Save results to disk in a reproducible format</p></li>
+</ul>
+</section>
+<section id="core-functions">
+<h2>Core Functions<a class="headerlink" href="#core-functions" title="Link to this heading">#</a></h2>
+<section id="evaluate">
+<h3><code class="docutils literal notranslate"><span class="pre">evaluate(...)</span></code><a class="headerlink" href="#evaluate" title="Link to this heading">#</a></h3>
+<p>Evaluates prediction against internal ground truth using dataset config.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">pair_id</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Automatically loads test data</p></li>
+<li><p>Computes metrics defined in dataset YAML</p></li>
+</ul>
+</section>
+<section id="evaluate-custom">
+<h3><code class="docutils literal notranslate"><span class="pre">evaluate_custom(...)</span></code><a class="headerlink" href="#evaluate-custom" title="Link to this heading">#</a></h3>
+<p>Same as <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> but uses externally provided <code class="docutils literal notranslate"><span class="pre">truth</span></code> array.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">evaluate_custom</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">pair_id</span><span class="p">,</span> <span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="metrics">
+<h2>Metrics<a class="headerlink" href="#metrics" title="Link to this heading">#</a></h2>
+<section id="short-time-forecast">
+<h3><code class="docutils literal notranslate"><span class="pre">short_time_forecast(...)</span></code><a class="headerlink" href="#short-time-forecast" title="Link to this heading">#</a></h3>
+<p>Compares only the first <code class="docutils literal notranslate"><span class="pre">k</span></code> time steps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">short_time_forecast</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Returns percentage accuracy (100% = perfect match)</p></li>
+</ul>
+</section>
+<section id="reconstruction">
+<h3><code class="docutils literal notranslate"><span class="pre">reconstruction(...)</span></code><a class="headerlink" href="#reconstruction" title="Link to this heading">#</a></h3>
+<p>Compares entire predicted vs. true trajectory:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">reconstruction</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="long-time-forecast-dynamical">
+<h3><code class="docutils literal notranslate"><span class="pre">long_time_forecast_dynamical(...)</span></code><a class="headerlink" href="#long-time-forecast-dynamical" title="Link to this heading">#</a></h3>
+<p>Histogram-based comparison of last <code class="docutils literal notranslate"><span class="pre">modes</span></code> time steps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">long_time_forecast_dynamical</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">modes</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="long-time-forecast-spatio-temporal">
+<h3><code class="docutils literal notranslate"><span class="pre">long_time_forecast_spatio_temporal(...)</span></code><a class="headerlink" href="#long-time-forecast-spatio-temporal" title="Link to this heading">#</a></h3>
+<p>PSD-based comparison for spatiotemporal systems:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">long_time_forecast_spatio_temporal</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Uses Fourier power spectral density to compare dynamics</p></li>
+</ul>
+</section>
+</section>
+<section id="power-spectral-density-tools">
+<h2>Power Spectral Density Tools<a class="headerlink" href="#power-spectral-density-tools" title="Link to this heading">#</a></h2>
+<section id="compute-psd">
+<h3><code class="docutils literal notranslate"><span class="pre">compute_psd(...)</span></code><a class="headerlink" href="#compute-psd" title="Link to this heading">#</a></h3>
+<p>Computes average PSD over last <code class="docutils literal notranslate"><span class="pre">k</span></code> time steps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">psd</span> <span class="o">=</span> <span class="n">compute_psd</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>For use in <code class="docutils literal notranslate"><span class="pre">long_time_forecast_spatio_temporal</span></code></p></li>
+</ul>
+</section>
+<section id="compute-log-psd">
+<h3><code class="docutils literal notranslate"><span class="pre">compute_log_psd(...)</span></code><a class="headerlink" href="#compute-log-psd" title="Link to this heading">#</a></h3>
+<p>Same as above, but returns <code class="docutils literal notranslate"><span class="pre">log(PSD</span> <span class="pre">+</span> <span class="pre">1e-10)</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log_psd</span> <span class="o">=</span> <span class="n">compute_log_psd</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Avoids issues with zero values in PSD</p></li>
+</ul>
+</section>
+</section>
+<section id="batch-evaluation-utilities">
+<h2>Batch Evaluation Utilities<a class="headerlink" href="#batch-evaluation-utilities" title="Link to this heading">#</a></h2>
+<section id="extract-metrics-in-order">
+<h3><code class="docutils literal notranslate"><span class="pre">extract_metrics_in_order(...)</span></code><a class="headerlink" href="#extract-metrics-in-order" title="Link to this heading">#</a></h3>
+<p>Ensures consistent metric ordering across sub-datasets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metrics</span> <span class="o">=</span> <span class="n">extract_metrics_in_order</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">batch_results</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Pulls values based on config-defined order for each pair</p></li>
+</ul>
+</section>
+<section id="save-results">
+<h3><code class="docutils literal notranslate"><span class="pre">save_results(...)</span></code><a class="headerlink" href="#save-results" title="Link to this heading">#</a></h3>
+<p>Persists all output for a given model run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">save_results</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">pair_id</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Saves:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">predictions.npy</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluation_results.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config.yaml</span></code></p></li>
+</ul>
+</li>
+<li><p>Stored at:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">/&lt;</span><span class="n">dataset</span><span class="o">&gt;/&lt;</span><span class="n">model</span><span class="o">&gt;/&lt;</span><span class="n">batch_id</span><span class="o">&gt;/</span><span class="n">pair</span><span class="o">&lt;</span><span class="nb">id</span><span class="o">&gt;/</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Metric scores are always <strong>percentages</strong>, where 100% means perfect match.</p></li>
+<li><p>Config files specify which metrics to evaluate per pair:</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pairs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">metrics</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">short_time</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">reconstruction</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">long_time</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluation_params</span></code> specify parameters like <code class="docutils literal notranslate"><span class="pre">k</span></code>, <code class="docutils literal notranslate"><span class="pre">modes</span></code>, <code class="docutils literal notranslate"><span class="pre">bins</span></code>.</p></li>
+</ul>
+</section>
+<section id="typical-workflow">
+<h2>Typical Workflow<a class="headerlink" href="#typical-workflow" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Run a model to get <code class="docutils literal notranslate"><span class="pre">predictions</span></code>.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">evaluate(...)</span></code> to compute metrics.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">save_results(...)</span></code> to save predictions, config, and scores.</p></li>
+<li><p>Optionally use <code class="docutils literal notranslate"><span class="pre">extract_metrics_in_order(...)</span></code> for plotting.</p></li>
+</ol>
+</section>
+<section id="future-enhancements">
+<h2>Future Enhancements<a class="headerlink" href="#future-enhancements" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Additional metrics (e.g., mean absolute error, KL-divergence)</p></li>
+<li><p>Per-variable breakdown of metrics</p></li>
+<li><p>Support for multi-output models with task-specific metrics</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="benchmark_module.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Benchmark Module</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="performance_module.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Performance Module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-functions">Core Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate"><code class="docutils literal notranslate"><span class="pre">evaluate(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-custom"><code class="docutils literal notranslate"><span class="pre">evaluate_custom(...)</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#short-time-forecast"><code class="docutils literal notranslate"><span class="pre">short_time_forecast(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruction"><code class="docutils literal notranslate"><span class="pre">reconstruction(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-time-forecast-dynamical"><code class="docutils literal notranslate"><span class="pre">long_time_forecast_dynamical(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-time-forecast-spatio-temporal"><code class="docutils literal notranslate"><span class="pre">long_time_forecast_spatio_temporal(...)</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-spectral-density-tools">Power Spectral Density Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-psd"><code class="docutils literal notranslate"><span class="pre">compute_psd(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-log-psd"><code class="docutils literal notranslate"><span class="pre">compute_log_psd(...)</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-evaluation-utilities">Batch Evaluation Utilities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-metrics-in-order"><code class="docutils literal notranslate"><span class="pre">extract_metrics_in_order(...)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-results"><code class="docutils literal notranslate"><span class="pre">save_results(...)</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-workflow">Typical Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-enhancements">Future Enhancements</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, CTF4Science Team.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

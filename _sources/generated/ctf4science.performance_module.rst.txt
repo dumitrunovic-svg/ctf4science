@@ -1,0 +1,25 @@
+ctf4science.performance\_module
+===============================
+
+.. automodule:: ctf4science.performance_module
+
+   
+
+
+
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      measure_time
+
+
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+   
+      PerformanceMonitor
+

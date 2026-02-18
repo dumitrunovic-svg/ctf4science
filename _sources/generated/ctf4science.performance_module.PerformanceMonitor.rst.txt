@@ -1,0 +1,10 @@
+ctf4science.performance\_module.PerformanceMonitor
+==================================================
+
+.. currentmodule:: ctf4science.performance_module
+
+.. autoclass:: PerformanceMonitor
+
+    
+
+    

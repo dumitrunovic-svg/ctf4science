@@ -1,0 +1,11 @@
+
+
+ctf4science.eval\_module.long\_time\_forecast\_spatio\_temporal
+===============================================================
+
+.. currentmodule:: ctf4science.eval_module
+
+
+
+.. autofunction:: ctf4science.eval_module.long_time_forecast_spatio_temporal
+

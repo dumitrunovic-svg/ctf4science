@@ -1,0 +1,11 @@
+
+
+ctf4science.eval\_module.extract\_metrics\_in\_order
+====================================================
+
+.. currentmodule:: ctf4science.eval_module
+
+
+
+.. autofunction:: ctf4science.eval_module.extract_metrics_in_order
+
