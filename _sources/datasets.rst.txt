@@ -15,54 +15,54 @@ Dataset Summary Table
      - Spatial Dim
      - Long-Time Eval
      - Visualizations
-   * - ODE\\_Lorenz
+   * - ODE\_Lorenz
      - Dynamical
      - 0.05
      - 3
-     - histogram\\_L2\\_error
+     - histogram\_L2\_error
      - trajectories, histograms
-   * - PDE\\_KS
+   * - PDE\_KS
      - Spatio-temporal
      - 0.025
      - 1024
-     - spectral\\_L2\\_error
-     - psd, 2d\\_comparison
-   * - Lorenz\\_Official
+     - spectral\_L2\_error
+     - psd, 2d\_comparison
+   * - Lorenz\_Official
      - Dynamical
      - 0.05
      - 3
-     - histogram\\_L2\\_error
+     - histogram\_L2\_error
      - trajectories, histograms
-   * - KS\\_Official
+   * - KS\_Official
      - Spatio-temporal
      - 0.025
      - 1024
-     - spectral\\_L2\\_error
-     - psd, 2d\\_comparison
+     - spectral\_L2\_error
+     - psd, 2d\_comparison
    * - sst
      - Spatio-temporal
      - 1.0
      - 90601
-     - spectral\\_L2\\_error
-     - psd, 2d\\_comparison
+     - spectral\_L2\_error
+     - psd, 2d\_comparison
    * - seismo
      - Spatio-temporal
      - 1.0
      - 2048
-     - spectral\\_L2\\_error
-     - psd, 2d\\_comparison
-   * - ocean\\_das
+     - spectral\_L2\_error
+     - psd, 2d\_comparison
+   * - ocean\_das
      - Spatio-temporal
      - 1.0
      - 3000
-     - spectral\\_L2\\_error
-     - psd, 2d\\_comparison
+     - spectral\_L2\_error
+     - psd, 2d\_comparison
    * - crustal_3d
      - Spatio-temporal
      - 1.0
      - 62451, 26508
-     - spectral\\_L2\\_error
-     - psd, 2d\\_comparison
+     - spectral\_L2\_error
+     - psd, 2d\_comparison
 
 ODE\_Lorenz
 -----------
@@ -222,7 +222,7 @@ This dataset contains Global Sea Surface Temperature (SST) data from NASA's Grou
   * ID 8: E11 (short\_time)
   * ID 9: E12 (short\_time)
 
----
+----
 
 Each dataset configuration file (e.g., ``ODE_Lorenz.yaml``) includes:
 

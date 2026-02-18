@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Getting Started with CTF for Science Framework &#8212; CTF for Science Documentation</title>
+    <title>Getting Started &#8212; CTF for Science Documentation</title>
   
   
   
@@ -169,15 +169,22 @@
                 <ul id="pst-nav-more-links" class="dropdown-menu">
                     
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="api.html">
-    API
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link dropdown-item nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -293,15 +300,22 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="api.html">
-    API
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -371,7 +385,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Getting Started with CTF for Science Framework</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Getting Started</span></li>
   </ul>
 </nav>
 </div>
@@ -388,8 +402,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="getting-started-with-ctf-for-science-framework">
-<h1>Getting Started with CTF for Science Framework<a class="headerlink" href="#getting-started-with-ctf-for-science-framework" title="Link to this heading">#</a></h1>
+  <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
 <p>This guide provides detailed instructions to help new users install, use, and contribute to the CTF for Science Framework.</p>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
@@ -416,12 +430,15 @@ Install the framework as a Python package in editable mode:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">scipy</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pyyaml</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seaborn</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">importlib-resources</span></code></p></li>
 </ul>
 <p>To install all optional dependencies, run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.[all]</span></code> instead. This installs optional dependencies:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">plotly</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">optuna</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">jupyterlab</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ray[data,train,tune,serve]</span></code></p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -469,7 +486,7 @@ Install the framework as a Python package in editable mode:</p>
 <li><p><strong>Purpose</strong>: Handles dataset loading and sub-dataset selection.</p></li>
 <li><p><strong>Key Functions</strong>:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">load_dataset(dataset_name,</span> <span class="pre">pair_id)</span></code>: Loads train and test data for a specific sub-dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">load_dataset(dataset_name,</span> <span class="pre">pair_id,</span> <span class="pre">transpose=False)</span></code>: Loads train and test data for a specific sub-dataset.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parse_pair_ids(dataset_config)</span></code>: Interprets the <code class="docutils literal notranslate"><span class="pre">pair_id</span></code> configuration to determine which sub-datasets to process. It supports multiple formats (see “Configuring Your Run” below).</p></li>
 </ul>
 </li>
@@ -480,7 +497,7 @@ Install the framework as a Python package in editable mode:</p>
 <li><p><strong>Purpose</strong>: Computes evaluation metrics for model predictions.</p></li>
 <li><p><strong>Key Functions</strong>:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluate(dataset_name,</span> <span class="pre">pair_id,</span> <span class="pre">truth,</span> <span class="pre">prediction)</span></code>: Calculates metrics like short-time forecast, reconstruction, and long-time forecast.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate(dataset_name,</span> <span class="pre">pair_id,</span> <span class="pre">prediction,</span> <span class="pre">metrics=None)</span></code>: Calculates metrics like short-time forecast, reconstruction, and long-time forecast.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">save_results(...)</span></code>: Saves config, predictions, and metrics to the <code class="docutils literal notranslate"><span class="pre">results/</span></code> directory for each sub-dataset.</p></li>
 </ul>
 </li>

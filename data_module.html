@@ -46,8 +46,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'data_module';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Datasets" href="datasets.html" />
-    <link rel="prev" title="Visualization Module" href="visualization_module.html" />
+    <link rel="next" title="Evaluation Module" href="evaluation_module.html" />
+    <link rel="prev" title="Benchmark Module" href="benchmark_module.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -169,15 +169,22 @@
                 <ul id="pst-nav-more-links" class="dropdown-menu">
                     
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="api.html">
-    API
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link dropdown-item nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -226,6 +233,10 @@
     </div>
   
 
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
   
 </div>
 
@@ -289,15 +300,22 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="api.html">
-    API
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -330,11 +348,11 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="benchmark_module.html">Benchmark Module</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation_module.html">Evaluation Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tune_module.html">Tune Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_module.html">Visualization Module</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Module</a></li>
 </ul>
 </div>
 </nav></div>
@@ -397,7 +415,104 @@
                   
   <section id="data-module">
 <h1>Data Module<a class="headerlink" href="#data-module" title="Link to this heading">#</a></h1>
-<p>TODO</p>
+<p>The Data Module (<code class="docutils literal notranslate"><span class="pre">data_module.py</span></code>) provides loading and configuration utilities for CTF datasets. It handles train/test pairs, timestep generation for training and evaluation, validation splits, and dataset metadata used by models and the evaluation pipeline.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The data module provides tools to:</p>
+<ul class="simple">
+<li><p><strong>Load datasets</strong>: Load training and initialization (or test) data for a given dataset name and pair ID</p></li>
+<li><p><strong>Resolve pair IDs</strong>: Parse <code class="docutils literal notranslate"><span class="pre">pair_id</span></code> from config (single ID, list, range, or <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>)</p></li>
+<li><p><strong>Timesteps</strong>: Get training timesteps and prediction timesteps for a pair</p></li>
+<li><p><strong>Validation</strong>: Support validation splits (training/validation timesteps and <code class="docutils literal notranslate"><span class="pre">load_validation_dataset</span></code>)</p></li>
+<li><p><strong>Config and metadata</strong>: Read dataset YAML config and metadata (e.g. <code class="docutils literal notranslate"><span class="pre">delta_t</span></code>, matrix shapes)</p></li>
+<li><p><strong>Visualization</strong>: Get which plot types apply to a dataset (<code class="docutils literal notranslate"><span class="pre">get_applicable_plots</span></code>)</p></li>
+</ul>
+<p>Dataset layout is under <code class="docutils literal notranslate"><span class="pre">data/{dataset_name}/</span></code> with a <code class="docutils literal notranslate"><span class="pre">{dataset_name}.yaml</span></code> config and <code class="docutils literal notranslate"><span class="pre">train/</span></code> (and optionally test) data files. See <a class="reference internal" href="datasets.html"><span class="doc">Datasets</span></a> for available datasets.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<section id="programmatic-usage">
+<h3>Programmatic Usage<a class="headerlink" href="#programmatic-usage" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ctf4science.data_module</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_config</span><span class="p">,</span>
+    <span class="n">parse_pair_ids</span><span class="p">,</span>
+    <span class="n">load_dataset</span><span class="p">,</span>
+    <span class="n">get_training_timesteps</span><span class="p">,</span>
+    <span class="n">get_prediction_timesteps</span><span class="p">,</span>
+    <span class="n">get_metadata</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Dataset config and which pairs to process</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">get_config</span><span class="p">(</span><span class="s2">&quot;ODE_Lorenz&quot;</span><span class="p">)</span>
+<span class="n">pair_ids</span> <span class="o">=</span> <span class="n">parse_pair_ids</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ODE_Lorenz&quot;</span><span class="p">,</span> <span class="s2">&quot;pair_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+
+<span class="c1"># Load train and initialization data for one pair</span>
+<span class="n">train_data</span><span class="p">,</span> <span class="n">init_data</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;ODE_Lorenz&quot;</span><span class="p">,</span> <span class="n">pair_id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Timesteps for training and for evaluation</span>
+<span class="n">train_timesteps</span> <span class="o">=</span> <span class="n">get_training_timesteps</span><span class="p">(</span><span class="s2">&quot;ODE_Lorenz&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">pred_timesteps</span> <span class="o">=</span> <span class="n">get_prediction_timesteps</span><span class="p">(</span><span class="s2">&quot;ODE_Lorenz&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+
+<span class="c1"># Metadata (delta_t, matrix_shapes, etc.)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">get_metadata</span><span class="p">(</span><span class="s2">&quot;ODE_Lorenz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="validation-splits">
+<h3>Validation Splits<a class="headerlink" href="#validation-splits" title="Link to this heading">#</a></h3>
+<p>For validation (e.g. hyperparameter tuning), use the validation helpers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ctf4science.data_module</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_validation_training_timesteps</span><span class="p">,</span>
+    <span class="n">get_validation_prediction_timesteps</span><span class="p">,</span>
+    <span class="n">load_validation_dataset</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">val_train_t</span> <span class="o">=</span> <span class="n">get_validation_training_timesteps</span><span class="p">(</span><span class="s2">&quot;ODE_Lorenz&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">train_split</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">val_pred_t</span> <span class="o">=</span> <span class="n">get_validation_prediction_timesteps</span><span class="p">(</span><span class="s2">&quot;ODE_Lorenz&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">train_split</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">train_data</span><span class="p">,</span> <span class="n">init_data</span> <span class="o">=</span> <span class="n">load_validation_dataset</span><span class="p">(</span><span class="s2">&quot;ODE_Lorenz&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">train_split</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pair-id-configuration">
+<h2>Pair ID Configuration<a class="headerlink" href="#pair-id-configuration" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">pair_id</span></code> in the dataset section of a run config can be:</p>
+<ul class="simple">
+<li><p>A single integer: process that pair only</p></li>
+<li><p>A list of integers: process those pairs</p></li>
+<li><p>A range string (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;1-3&quot;</span></code>): process pairs 1, 2, 3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>: process all pairs defined in the dataset YAML</p></li>
+</ul>
+<p>Use <code class="docutils literal notranslate"><span class="pre">parse_pair_ids(dataset_config)</span></code> to resolve this to a <code class="docutils literal notranslate"><span class="pre">List[int]</span></code>.</p>
+</section>
+<section id="key-functions">
+<h2>Key Functions<a class="headerlink" href="#key-functions" title="Link to this heading">#</a></h2>
+<p>Please refer to <a class="reference internal" href="api.html"><span class="doc">API</span></a> for the full API of the data module. Main entry points:</p>
+<ul class="simple">
+<li><p><strong>Config and discovery</strong>: <code class="docutils literal notranslate"><span class="pre">get_config</span></code>, <code class="docutils literal notranslate"><span class="pre">get_metadata</span></code>, <code class="docutils literal notranslate"><span class="pre">parse_pair_ids</span></code>, <code class="docutils literal notranslate"><span class="pre">get_applicable_plots</span></code></p></li>
+<li><p><strong>Loading</strong>: <code class="docutils literal notranslate"><span class="pre">load_dataset</span></code>, <code class="docutils literal notranslate"><span class="pre">load_validation_dataset</span></code></p></li>
+<li><p><strong>Timesteps</strong>: <code class="docutils literal notranslate"><span class="pre">get_training_timesteps</span></code>, <code class="docutils literal notranslate"><span class="pre">get_prediction_timesteps</span></code>, <code class="docutils literal notranslate"><span class="pre">get_validation_training_timesteps</span></code>, <code class="docutils literal notranslate"><span class="pre">get_validation_prediction_timesteps</span></code></p></li>
+</ul>
+</section>
+<section id="data-formats">
+<h2>Data Formats<a class="headerlink" href="#data-formats" title="Link to this heading">#</a></h2>
+<p>The module supports:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.mat</span></code> (MATLAB) files with a single main variable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.npy</span></code> (NumPy) and <code class="docutils literal notranslate"><span class="pre">.npz</span></code> files</p></li>
+</ul>
+<p>Training and test file names and structure are defined per pair in the dataset <code class="docutils literal notranslate"><span class="pre">{dataset_name}.yaml</span></code> under <code class="docutils literal notranslate"><span class="pre">pairs</span></code>.</p>
+</section>
+<section id="integration">
+<h2>Integration<a class="headerlink" href="#integration" title="Link to this heading">#</a></h2>
+<p>The data module is used by:</p>
+<ul class="simple">
+<li><p><strong>Benchmark and evaluation</strong>: Config and pair resolution; loading test data for metrics</p></li>
+<li><p><strong>Models</strong>: Loading training/initialization data and timesteps</p></li>
+<li><p><strong>Visualization</strong>: <code class="docutils literal notranslate"><span class="pre">get_applicable_plots</span></code> and metadata for plot configuration</p></li>
+<li><p><strong>Tune module</strong>: Validation data and timesteps for hyperparameter search</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -411,20 +526,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="visualization_module.html"
+       href="benchmark_module.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Visualization Module</p>
+        <p class="prev-next-title">Benchmark Module</p>
       </div>
     </a>
     <a class="right-next"
-       href="datasets.html"
+       href="evaluation_module.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Datasets</p>
+        <p class="prev-next-title">Evaluation Module</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -434,6 +549,33 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#programmatic-usage">Programmatic Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-splits">Validation Splits</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pair-id-configuration">Pair ID Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-functions">Key Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-formats">Data Formats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration">Integration</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

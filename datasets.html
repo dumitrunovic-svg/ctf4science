@@ -48,7 +48,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Configuration File Overview" href="configuration.html" />
-    <link rel="prev" title="Data Module" href="data_module.html" />
+    <link rel="prev" title="Visualization Module" href="visualization_module.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -170,15 +170,22 @@
                 <ul id="pst-nav-more-links" class="dropdown-menu">
                     
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="api.html">
-    API
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link dropdown-item nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -294,15 +301,22 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="api.html">
-    API
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -405,61 +419,61 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>ODE\_Lorenz</p></td>
+<tr class="row-even"><td><p>ODE_Lorenz</p></td>
 <td><p>Dynamical</p></td>
 <td><p>0.05</p></td>
 <td><p>3</p></td>
-<td><p>histogram\_L2\_error</p></td>
+<td><p>histogram_L2_error</p></td>
 <td><p>trajectories, histograms</p></td>
 </tr>
-<tr class="row-odd"><td><p>PDE\_KS</p></td>
+<tr class="row-odd"><td><p>PDE_KS</p></td>
 <td><p>Spatio-temporal</p></td>
 <td><p>0.025</p></td>
 <td><p>1024</p></td>
-<td><p>spectral\_L2\_error</p></td>
-<td><p>psd, 2d\_comparison</p></td>
+<td><p>spectral_L2_error</p></td>
+<td><p>psd, 2d_comparison</p></td>
 </tr>
-<tr class="row-even"><td><p>Lorenz\_Official</p></td>
+<tr class="row-even"><td><p>Lorenz_Official</p></td>
 <td><p>Dynamical</p></td>
 <td><p>0.05</p></td>
 <td><p>3</p></td>
-<td><p>histogram\_L2\_error</p></td>
+<td><p>histogram_L2_error</p></td>
 <td><p>trajectories, histograms</p></td>
 </tr>
-<tr class="row-odd"><td><p>KS\_Official</p></td>
+<tr class="row-odd"><td><p>KS_Official</p></td>
 <td><p>Spatio-temporal</p></td>
 <td><p>0.025</p></td>
 <td><p>1024</p></td>
-<td><p>spectral\_L2\_error</p></td>
-<td><p>psd, 2d\_comparison</p></td>
+<td><p>spectral_L2_error</p></td>
+<td><p>psd, 2d_comparison</p></td>
 </tr>
 <tr class="row-even"><td><p>sst</p></td>
 <td><p>Spatio-temporal</p></td>
 <td><p>1.0</p></td>
 <td><p>90601</p></td>
-<td><p>spectral\_L2\_error</p></td>
-<td><p>psd, 2d\_comparison</p></td>
+<td><p>spectral_L2_error</p></td>
+<td><p>psd, 2d_comparison</p></td>
 </tr>
 <tr class="row-odd"><td><p>seismo</p></td>
 <td><p>Spatio-temporal</p></td>
 <td><p>1.0</p></td>
 <td><p>2048</p></td>
-<td><p>spectral\_L2\_error</p></td>
-<td><p>psd, 2d\_comparison</p></td>
+<td><p>spectral_L2_error</p></td>
+<td><p>psd, 2d_comparison</p></td>
 </tr>
-<tr class="row-even"><td><p>ocean\_das</p></td>
+<tr class="row-even"><td><p>ocean_das</p></td>
 <td><p>Spatio-temporal</p></td>
 <td><p>1.0</p></td>
 <td><p>3000</p></td>
-<td><p>spectral\_L2\_error</p></td>
-<td><p>psd, 2d\_comparison</p></td>
+<td><p>spectral_L2_error</p></td>
+<td><p>psd, 2d_comparison</p></td>
 </tr>
 <tr class="row-odd"><td><p>crustal_3d</p></td>
 <td><p>Spatio-temporal</p></td>
 <td><p>1.0</p></td>
 <td><p>62451, 26508</p></td>
-<td><p>spectral\_L2\_error</p></td>
-<td><p>psd, 2d\_comparison</p></td>
+<td><p>spectral_L2_error</p></td>
+<td><p>psd, 2d_comparison</p></td>
 </tr>
 </tbody>
 </table>
@@ -638,7 +652,7 @@
 </ul>
 </li>
 </ul>
-<p>—</p>
+<hr class="docutils" />
 <p>Each dataset configuration file (e.g., <code class="docutils literal notranslate"><span class="pre">ODE_Lorenz.yaml</span></code>) includes:</p>
 <ul class="simple">
 <li><p>The full list of train/test matrix files.</p></li>
@@ -660,12 +674,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="data_module.html"
+       href="visualization_module.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data Module</p>
+        <p class="prev-next-title">Visualization Module</p>
       </div>
     </a>
     <a class="right-next"

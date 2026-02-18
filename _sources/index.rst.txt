@@ -13,8 +13,9 @@ CTF4Science is a framework for comprehensive benchmarking of modeling methods on
    Modules <modules>
    Datasets <datasets>
    Configuration <configuration>
-   API <api>
    Contributing <contributing>
+   Citations <citations>
+   API <api>
 
 .. grid:: 1 1 2 2
     :gutter: 2 3 4 4

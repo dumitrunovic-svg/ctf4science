@@ -46,7 +46,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'visualization_module';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Module" href="data_module.html" />
+    <link rel="next" title="Datasets" href="datasets.html" />
     <link rel="prev" title="Tune Module" href="tune_module.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -169,15 +169,22 @@
                 <ul id="pst-nav-more-links" class="dropdown-menu">
                     
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="api.html">
-    API
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link dropdown-item nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -293,15 +300,22 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="api.html">
-    API
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -334,11 +348,11 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="benchmark_module.html">Benchmark Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_module.html">Data Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation_module.html">Evaluation Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tune_module.html">Tune Module</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Visualization Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_module.html">Data Module</a></li>
 </ul>
 </div>
 </nav></div>
@@ -431,85 +445,7 @@
 </section>
 <section id="plotting-functions">
 <h2>Plotting Functions<a class="headerlink" href="#plotting-functions" title="Link to this heading">#</a></h2>
-<section id="plot-trajectories">
-<h3><code class="docutils literal notranslate"><span class="pre">plot_trajectories(...)</span></code><a class="headerlink" href="#plot-trajectories" title="Link to this heading">#</a></h3>
-<p>Plot time-series trajectories of each variable.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_trajectories</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="p">[</span><span class="n">predictions</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Compares each prediction to the ground truth.</p></li>
-<li><p>One subplot per variable.</p></li>
-</ul>
-</section>
-<section id="plot-errors">
-<h3><code class="docutils literal notranslate"><span class="pre">plot_errors(...)</span></code><a class="headerlink" href="#plot-errors" title="Link to this heading">#</a></h3>
-<p>Visualize error metrics (e.g., short_time, reconstruction) over time or sub-datasets.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_errors</span><span class="p">(</span><span class="n">errors_dict</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Accepts a dictionary of error lists: <code class="docutils literal notranslate"><span class="pre">{metric_name:</span> <span class="pre">[values]}</span></code>.</p></li>
-</ul>
-</section>
-<section id="plot-histograms">
-<h3><code class="docutils literal notranslate"><span class="pre">plot_histograms(...)</span></code><a class="headerlink" href="#plot-histograms" title="Link to this heading">#</a></h3>
-<p>Show histograms of variable values for the final <code class="docutils literal notranslate"><span class="pre">modes</span></code> time steps.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_histograms</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="p">[</span><span class="n">predictions</span><span class="p">],</span> <span class="n">modes</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="plot-psd">
-<h3><code class="docutils literal notranslate"><span class="pre">plot_psd(...)</span></code><a class="headerlink" href="#plot-psd" title="Link to this heading">#</a></h3>
-<p>Display log-scaled Power Spectral Densities (PSD) for spatiotemporal systems.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="p">[</span><span class="n">predictions</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Analyzes the frequency content of the final <code class="docutils literal notranslate"><span class="pre">k</span></code> time steps.</p></li>
-</ul>
-</section>
-<section id="compare-prediction">
-<h3><code class="docutils literal notranslate"><span class="pre">compare_prediction(...)</span></code><a class="headerlink" href="#compare-prediction" title="Link to this heading">#</a></h3>
-<p>2D image-style comparison of prediction, truth, and error.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">compare_prediction</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="p">[</span><span class="n">predictions</span><span class="p">])</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Useful for image-like or spatiotemporal data.</p></li>
-</ul>
-</section>
-</section>
-<section id="batch-and-file-based-plotting">
-<h2>Batch and File-Based Plotting<a class="headerlink" href="#batch-and-file-based-plotting" title="Link to this heading">#</a></h2>
-<section id="plot-from-batch">
-<h3><code class="docutils literal notranslate"><span class="pre">plot_from_batch(...)</span></code><a class="headerlink" href="#plot-from-batch" title="Link to this heading">#</a></h3>
-<p>Generates a single plot by reading prediction and evaluation results from disk.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_from_batch</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">pair_id</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;trajectories&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Supports <code class="docutils literal notranslate"><span class="pre">plot_type</span></code>: <code class="docutils literal notranslate"><span class="pre">trajectories</span></code>, <code class="docutils literal notranslate"><span class="pre">histograms</span></code>, <code class="docutils literal notranslate"><span class="pre">psd</span></code>, <code class="docutils literal notranslate"><span class="pre">errors</span></code>, <code class="docutils literal notranslate"><span class="pre">2d_comparison</span></code></p></li>
-<li><p>Uses <code class="docutils literal notranslate"><span class="pre">results/&lt;dataset&gt;/&lt;model&gt;/&lt;batch_id&gt;/pair&lt;id&gt;/</span></code> to load data.</p></li>
-</ul>
-</section>
-<section id="generate-all-plots">
-<h3><code class="docutils literal notranslate"><span class="pre">generate_all_plots(...)</span></code><a class="headerlink" href="#generate-all-plots" title="Link to this heading">#</a></h3>
-<p>Generates and saves <strong>all applicable plots</strong> for a batch run.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span><span class="o">.</span><span class="n">generate_all_plots</span><span class="p">(</span><span class="n">dataset_name</span><span class="o">=</span><span class="s1">&#39;ODE_Lorenz&#39;</span><span class="p">,</span> <span class="n">batch_path</span><span class="o">=</span><span class="s1">&#39;results/ODE_Lorenz/MyModel/batch_xyz&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Plots are saved under each <code class="docutils literal notranslate"><span class="pre">pair*/visualizations/</span></code> directory.</p></li>
-</ul>
-</section>
-<section id="save-figure-results">
-<h3><code class="docutils literal notranslate"><span class="pre">save_figure_results(...)</span></code><a class="headerlink" href="#save-figure-results" title="Link to this heading">#</a></h3>
-<p>Saves a <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> to the appropriate results folder.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span><span class="o">.</span><span class="n">save_figure_results</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">pair_id</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
+<p>Please refer to <a class="reference internal" href="api.html"><span class="doc">API</span></a> for the full API of the visualization module.</p>
 </section>
 <section id="customization">
 <h2>Customization<a class="headerlink" href="#customization" title="Link to this heading">#</a></h2>
@@ -548,15 +484,6 @@
 <li><p>Use Jupyter to call plotting functions interactively and tweak parameters.</p></li>
 </ul>
 </section>
-<section id="additional-resources">
-<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>See <code class="docutils literal notranslate"><span class="pre">visualization_module.py</span></code> for source code</p></li>
-<li><p>Customize colors and layout using your own YAML configuration</p></li>
-<li><p>For evaluating metrics, refer to <a class="reference internal" href="evaluation_metrics.html"><span class="doc">Evaluation Metrics</span></a></p></li>
-<li><p>For dataset formats, refer to <a class="reference internal" href="datasets.html"><span class="doc">Datasets</span></a></p></li>
-</ul>
-</section>
 </section>
 
 
@@ -579,11 +506,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="data_module.html"
+       href="datasets.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Module</p>
+        <p class="prev-next-title">Datasets</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -611,24 +538,10 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-initialize">Import and Initialize</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-functions">Plotting Functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-trajectories"><code class="docutils literal notranslate"><span class="pre">plot_trajectories(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-errors"><code class="docutils literal notranslate"><span class="pre">plot_errors(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histograms"><code class="docutils literal notranslate"><span class="pre">plot_histograms(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-psd"><code class="docutils literal notranslate"><span class="pre">plot_psd(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-prediction"><code class="docutils literal notranslate"><span class="pre">compare_prediction(...)</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-and-file-based-plotting">Batch and File-Based Plotting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-from-batch"><code class="docutils literal notranslate"><span class="pre">plot_from_batch(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-all-plots"><code class="docutils literal notranslate"><span class="pre">generate_all_plots(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-figure-results"><code class="docutils literal notranslate"><span class="pre">save_figure_results(...)</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-functions">Plotting Functions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization">Customization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-locations">Output Locations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips">Tips</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a></li>
 </ul>
   </nav></div>
 

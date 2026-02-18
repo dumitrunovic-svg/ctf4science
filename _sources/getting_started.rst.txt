@@ -1,4 +1,4 @@
-Getting Started with CTF for Science Framework
+Getting Started
 ==============================================
 
 This guide provides detailed instructions to help new users install, use, and contribute to the CTF for Science Framework.
@@ -34,12 +34,15 @@ To set up the framework on your system:
    - ``scipy``
    - ``pyyaml``
    - ``matplotlib``
+   - ``seaborn``
    - ``importlib-resources``
 
    To install all optional dependencies, run ``pip install -e .[all]`` instead. This installs optional dependencies:
 
+   - ``plotly``
    - ``optuna``
    - ``jupyterlab``
+   - ``ray[data,train,tune,serve]``
 
    .. note::
       zsh shell users should run ``pip install -e '.[all]'`` to avoid errors.
@@ -83,7 +86,7 @@ The framework relies on three key modules:
   - **Purpose**: Handles dataset loading and sub-dataset selection.
   - **Key Functions**:
 
-    - ``load_dataset(dataset_name, pair_id)``: Loads train and test data for a specific sub-dataset.
+    - ``load_dataset(dataset_name, pair_id, transpose=False)``: Loads train and test data for a specific sub-dataset.
     - ``parse_pair_ids(dataset_config)``: Interprets the ``pair_id`` configuration to determine which sub-datasets to process. It supports multiple formats (see "Configuring Your Run" below).
 
 - ``eval_module.py``:
@@ -91,7 +94,7 @@ The framework relies on three key modules:
   - **Purpose**: Computes evaluation metrics for model predictions.
   - **Key Functions**:
 
-    - ``evaluate(dataset_name, pair_id, truth, prediction)``: Calculates metrics like short-time forecast, reconstruction, and long-time forecast.
+    - ``evaluate(dataset_name, pair_id, prediction, metrics=None)``: Calculates metrics like short-time forecast, reconstruction, and long-time forecast.
     - ``save_results(...)``: Saves config, predictions, and metrics to the ``results/`` directory for each sub-dataset.
 
 - ``visualization_module.py``:

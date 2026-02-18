@@ -12,7 +12,7 @@ The environment can be created by running::
    pyenv local 3.13.7
    python -m venv ~/.virtualenvs/ctf4science
    source ~/.virtualenvs/ctf4science/bin/activate
-   pip install -e .[dev]
+   pip install -e .[all,dev]
 
 Nox Taskrunner
 --------------
@@ -160,6 +160,6 @@ Code Review
 * Participate in code reviews to maintain code quality.
 * Be open to feedback and make necessary adjustments.
 
----
+----
 
 Thank you for contributing to the CTF for Science Framework! Your efforts help advance scientific computing and modeling. If you have any questions, feel free to reach out to the project maintainers.

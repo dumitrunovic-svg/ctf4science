@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Performance Module" href="performance_module.html" />
-    <link rel="prev" title="Benchmark Module" href="benchmark_module.html" />
+    <link rel="prev" title="Data Module" href="data_module.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -169,15 +169,22 @@
                 <ul id="pst-nav-more-links" class="dropdown-menu">
                     
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="api.html">
-    API
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class=" ">
-  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link dropdown-item nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -293,15 +300,22 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="api.html">
-    API
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="contributing.html">
-    Contributing
+  <a class="nav-link nav-internal" href="citations.html">
+    Citations
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API
   </a>
 </li>
 
@@ -334,11 +348,11 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="benchmark_module.html">Benchmark Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_module.html">Data Module</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluation Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tune_module.html">Tune Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization_module.html">Visualization Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_module.html">Data Module</a></li>
 </ul>
 </div>
 </nav></div>
@@ -421,120 +435,7 @@
 <li><p>Extract metrics in a consistent order across sub-datasets</p></li>
 <li><p>Save results to disk in a reproducible format</p></li>
 </ul>
-</section>
-<section id="core-functions">
-<h2>Core Functions<a class="headerlink" href="#core-functions" title="Link to this heading">#</a></h2>
-<section id="evaluate">
-<h3><code class="docutils literal notranslate"><span class="pre">evaluate(...)</span></code><a class="headerlink" href="#evaluate" title="Link to this heading">#</a></h3>
-<p>Evaluates prediction against internal ground truth using dataset config.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">pair_id</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Automatically loads test data</p></li>
-<li><p>Computes metrics defined in dataset YAML</p></li>
-</ul>
-</section>
-<section id="evaluate-custom">
-<h3><code class="docutils literal notranslate"><span class="pre">evaluate_custom(...)</span></code><a class="headerlink" href="#evaluate-custom" title="Link to this heading">#</a></h3>
-<p>Same as <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> but uses externally provided <code class="docutils literal notranslate"><span class="pre">truth</span></code> array.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">evaluate_custom</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">pair_id</span><span class="p">,</span> <span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="metrics">
-<h2>Metrics<a class="headerlink" href="#metrics" title="Link to this heading">#</a></h2>
-<section id="short-time-forecast">
-<h3><code class="docutils literal notranslate"><span class="pre">short_time_forecast(...)</span></code><a class="headerlink" href="#short-time-forecast" title="Link to this heading">#</a></h3>
-<p>Compares only the first <code class="docutils literal notranslate"><span class="pre">k</span></code> time steps:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">short_time_forecast</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Returns percentage accuracy (100% = perfect match)</p></li>
-</ul>
-</section>
-<section id="reconstruction">
-<h3><code class="docutils literal notranslate"><span class="pre">reconstruction(...)</span></code><a class="headerlink" href="#reconstruction" title="Link to this heading">#</a></h3>
-<p>Compares entire predicted vs. true trajectory:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">reconstruction</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="long-time-forecast-dynamical">
-<h3><code class="docutils literal notranslate"><span class="pre">long_time_forecast_dynamical(...)</span></code><a class="headerlink" href="#long-time-forecast-dynamical" title="Link to this heading">#</a></h3>
-<p>Histogram-based comparison of last <code class="docutils literal notranslate"><span class="pre">modes</span></code> time steps:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">long_time_forecast_dynamical</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">modes</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="long-time-forecast-spatio-temporal">
-<h3><code class="docutils literal notranslate"><span class="pre">long_time_forecast_spatio_temporal(...)</span></code><a class="headerlink" href="#long-time-forecast-spatio-temporal" title="Link to this heading">#</a></h3>
-<p>PSD-based comparison for spatiotemporal systems:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">long_time_forecast_spatio_temporal</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Uses Fourier power spectral density to compare dynamics</p></li>
-</ul>
-</section>
-</section>
-<section id="power-spectral-density-tools">
-<h2>Power Spectral Density Tools<a class="headerlink" href="#power-spectral-density-tools" title="Link to this heading">#</a></h2>
-<section id="compute-psd">
-<h3><code class="docutils literal notranslate"><span class="pre">compute_psd(...)</span></code><a class="headerlink" href="#compute-psd" title="Link to this heading">#</a></h3>
-<p>Computes average PSD over last <code class="docutils literal notranslate"><span class="pre">k</span></code> time steps:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">psd</span> <span class="o">=</span> <span class="n">compute_psd</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>For use in <code class="docutils literal notranslate"><span class="pre">long_time_forecast_spatio_temporal</span></code></p></li>
-</ul>
-</section>
-<section id="compute-log-psd">
-<h3><code class="docutils literal notranslate"><span class="pre">compute_log_psd(...)</span></code><a class="headerlink" href="#compute-log-psd" title="Link to this heading">#</a></h3>
-<p>Same as above, but returns <code class="docutils literal notranslate"><span class="pre">log(PSD</span> <span class="pre">+</span> <span class="pre">1e-10)</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log_psd</span> <span class="o">=</span> <span class="n">compute_log_psd</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Avoids issues with zero values in PSD</p></li>
-</ul>
-</section>
-</section>
-<section id="batch-evaluation-utilities">
-<h2>Batch Evaluation Utilities<a class="headerlink" href="#batch-evaluation-utilities" title="Link to this heading">#</a></h2>
-<section id="extract-metrics-in-order">
-<h3><code class="docutils literal notranslate"><span class="pre">extract_metrics_in_order(...)</span></code><a class="headerlink" href="#extract-metrics-in-order" title="Link to this heading">#</a></h3>
-<p>Ensures consistent metric ordering across sub-datasets:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metrics</span> <span class="o">=</span> <span class="n">extract_metrics_in_order</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">batch_results</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Pulls values based on config-defined order for each pair</p></li>
-</ul>
-</section>
-<section id="save-results">
-<h3><code class="docutils literal notranslate"><span class="pre">save_results(...)</span></code><a class="headerlink" href="#save-results" title="Link to this heading">#</a></h3>
-<p>Persists all output for a given model run:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">save_results</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">pair_id</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Saves:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">predictions.npy</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluation_results.yaml</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">config.yaml</span></code></p></li>
-</ul>
-</li>
-<li><p>Stored at:</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">/&lt;</span><span class="n">dataset</span><span class="o">&gt;/&lt;</span><span class="n">model</span><span class="o">&gt;/&lt;</span><span class="n">batch_id</span><span class="o">&gt;/</span><span class="n">pair</span><span class="o">&lt;</span><span class="nb">id</span><span class="o">&gt;/</span>
-</pre></div>
-</div>
-</section>
+<p>Please refer to <a class="reference internal" href="api.html"><span class="doc">API</span></a> for the full API of the evaluation module.</p>
 </section>
 <section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
@@ -581,12 +482,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="benchmark_module.html"
+       href="data_module.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Benchmark Module</p>
+        <p class="prev-next-title">Data Module</p>
       </div>
     </a>
     <a class="right-next"
@@ -618,28 +519,6 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-functions">Core Functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate"><code class="docutils literal notranslate"><span class="pre">evaluate(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-custom"><code class="docutils literal notranslate"><span class="pre">evaluate_custom(...)</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#short-time-forecast"><code class="docutils literal notranslate"><span class="pre">short_time_forecast(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruction"><code class="docutils literal notranslate"><span class="pre">reconstruction(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-time-forecast-dynamical"><code class="docutils literal notranslate"><span class="pre">long_time_forecast_dynamical(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-time-forecast-spatio-temporal"><code class="docutils literal notranslate"><span class="pre">long_time_forecast_spatio_temporal(...)</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-spectral-density-tools">Power Spectral Density Tools</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-psd"><code class="docutils literal notranslate"><span class="pre">compute_psd(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-log-psd"><code class="docutils literal notranslate"><span class="pre">compute_log_psd(...)</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-evaluation-utilities">Batch Evaluation Utilities</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-metrics-in-order"><code class="docutils literal notranslate"><span class="pre">extract_metrics_in_order(...)</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-results"><code class="docutils literal notranslate"><span class="pre">save_results(...)</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-workflow">Typical Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-enhancements">Future Enhancements</a></li>
