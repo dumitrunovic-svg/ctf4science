@@ -234,6 +234,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -411,7 +415,76 @@
                   
   <section id="performance-module">
 <h1>Performance Module<a class="headerlink" href="#performance-module" title="Link to this heading">#</a></h1>
-<p>TODO: Yue?</p>
+<p>This document describes the <code class="docutils literal notranslate"><span class="pre">performance_module</span></code> of the CTF for Science framework. It provides wall-clock time monitoring for model runs, used during benchmarking and hyperparameter tuning to track and summarize execution time.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The performance module provides:</p>
+<ul class="simple">
+<li><p><strong>PerformanceMonitor</strong> (class): Session-based monitoring that:</p>
+<ul>
+<li><p>Records start time and resets counters via <code class="docutils literal notranslate"><span class="pre">start_monitoring()</span></code></p></li>
+<li><p>Accepts per-run durations via <code class="docutils literal notranslate"><span class="pre">record_run(run_id,</span> <span class="pre">duration)</span></code></p></li>
+<li><p>Computes and returns summary metrics and writes a timestamped YAML file via <code class="docutils literal notranslate"><span class="pre">stop_monitoring()</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>measure_time</strong> (function): Wraps any callable, runs it once, and returns <code class="docutils literal notranslate"><span class="pre">(result,</span> <span class="pre">duration_seconds)</span></code>. Useful for timing a single run or trial.</p></li>
+<li><p><strong>Output</strong>: Summary YAML files under a configurable directory (default <code class="docutils literal notranslate"><span class="pre">results/performance_results</span></code>), with metrics such as total runs, total/average time per run, and session duration.</p></li>
+</ul>
+<p>Energy consumption is not measured in this module; it is handled at the SLURM job level using EAR via bash scripts.</p>
+<p>Please refer to <a class="reference internal" href="api.html"><span class="doc">API</span></a> for the full API of the performance module.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<p>Programmatic usage with <strong>PerformanceMonitor</strong> (e.g. inside a benchmark or tuning loop):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ctf4science.performance_module</span><span class="w"> </span><span class="kn">import</span> <span class="n">PerformanceMonitor</span>
+
+<span class="n">monitor</span> <span class="o">=</span> <span class="n">PerformanceMonitor</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;results/my_benchmark/performance&quot;</span><span class="p">)</span>
+<span class="n">monitor</span><span class="o">.</span><span class="n">start_monitoring</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_runs</span><span class="p">):</span>
+    <span class="c1"># ... run model ...</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="mf">42.5</span>  <span class="c1"># seconds (e.g. from measure_time or similar)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">record_run</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;run_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+
+<span class="n">summary</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">stop_monitoring</span><span class="p">()</span>
+<span class="c1"># summary has total_num_runs, total_run_time_seconds, average_time_per_run_seconds, etc.</span>
+<span class="c1"># A YAML file is also written under output_dir.</span>
+</pre></div>
+</div>
+<p>Timing a single call with <strong>measure_time</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ctf4science.performance_module</span><span class="w"> </span><span class="kn">import</span> <span class="n">measure_time</span>
+
+<span class="n">result</span><span class="p">,</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">measure_time</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">kw</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Completed in </span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="summary-output">
+<h2>Summary Output<a class="headerlink" href="#summary-output" title="Link to this heading">#</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">stop_monitoring()</span></code> is called, the monitor writes a YAML file (e.g. <code class="docutils literal notranslate"><span class="pre">performance_summary_YYYYMMDD_HHMMSS.yaml</span></code>) to the output directory. The returned (and saved) dictionary includes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">total_num_runs</span></code>: Number of runs recorded</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_run_time_seconds</span></code> / <code class="docutils literal notranslate"><span class="pre">total_run_time_hours</span></code>: Cumulative run time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">average_time_per_run_seconds</span></code> / <code class="docutils literal notranslate"><span class="pre">average_time_per_run_hours</span></code>: Mean duration per run</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_session_time_seconds</span></code> / <code class="docutils literal notranslate"><span class="pre">total_session_time_hours</span></code>: Wall time since <code class="docutils literal notranslate"><span class="pre">start_monitoring()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code>: ISO format timestamp</p></li>
+</ul>
+</section>
+<section id="integration">
+<h2>Integration<a class="headerlink" href="#integration" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Benchmark module</strong>: Uses <code class="docutils literal notranslate"><span class="pre">PerformanceMonitor</span></code> to track time across multiple evaluation runs and optionally record per-run duration.</p></li>
+<li><p><strong>Tune module</strong>: Can enable performance monitoring (<code class="docutils literal notranslate"><span class="pre">enable_performance_monitoring</span></code>) to record average time per trial and write summaries under the tune output directory.</p></li>
+</ul>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">stop_monitoring()</span></code> is called without a prior <code class="docutils literal notranslate"><span class="pre">start_monitoring()</span></code>, it returns an empty dict and does not write a file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">record_run</span></code> raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if <cite>duration</cite> is negative.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">measure_time</span></code> re-raises any exception raised by the callable; the exception is logged before re-raising.</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -448,6 +521,28 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-output">Summary Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration">Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
