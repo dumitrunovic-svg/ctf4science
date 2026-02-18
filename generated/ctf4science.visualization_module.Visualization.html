@@ -467,11 +467,11 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Generates visualizations of model predictions and evaluation metrics.</p>
 <p>Configuration is loaded from a YAML file (default or custom path) and stored
-in <code class="docutils literal notranslate"><span class="pre">config</span></code>.</p>
+in <cite>config</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>config_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to a custom YAML config file. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, uses default from package.</p>
+<dt><strong>config_path</strong><span class="classifier">str or Path, optional</span></dt><dd><p>Path to a custom YAML config file. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, uses default from package.</p>
 </dd>
 </dl>
 </dd>
@@ -480,25 +480,25 @@ in <code class="docutils literal notranslate"><span class="pre">config</span></c
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_prediction</span></code>(truth, predictions[, ...])</p></td>
-<td><p>Create a side-by-side comparison of test data and predicted data.</p></td>
+<td><p>Create a side-by-side comparison of truth, prediction(s), and error (2D data).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_all_plots</span></code>(dataset_name, batch_path, ...)</p></td>
-<td><p>Generate all applicable plots for a dataset based on its configuration.</p></td>
+<td><p>Generate all applicable plot types for the dataset and save under each pair dir.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_errors</span></code>(errors[, labels])</p></td>
 <td><p>Plot error metrics over time or across sub-datasets.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_from_batch</span></code>(dataset_name, pair_id, batch_id)</p></td>
-<td><p>Plot data from a run directory, supporting multiple plot types.</p></td>
+<td><p>Plot data from a batch directory for a given plot type.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_histograms</span></code>(truth, predictions, modes, bins)</p></td>
-<td><p>Plot histograms of variables for dynamical systems over the last 'modes' time steps.</p></td>
+<td><p>Plot histograms of variables over the last <cite>modes</cite> time steps.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_prediction</span></code>(ax, data[, vmin, vmax, ...])</p></td>
-<td><p>Plot a 2D prediction on the given axes with customizable display options.</p></td>
+<td><p>Plot a 2D array on the given axes with optional color scale and labels.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_psd</span></code>(truth, predictions, k, modes[, labels])</p></td>
-<td><p>Plot Power Spectral Density for spatio-temporal systems over the last k time steps.</p></td>
+<td><p>Plot log power spectral density over the last <cite>k</cite> time steps.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_trajectories</span></code>(truth, predictions[, labels])</p></td>
 <td><p>Plot stacked trajectories for each variable, comparing truth and predictions.</p></td>
@@ -518,46 +518,209 @@ in <code class="docutils literal notranslate"><span class="pre">config</span></c
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><strong>plot_trajectories</strong></p>
+<p><strong>Class Methods:</strong></p>
+<p><strong>plot_trajectories(self, truth, predictions, labels=None, **kwargs):</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">truth</span></code> : (time_steps, variables). <code class="docutils literal notranslate"><span class="pre">predictions</span></code> : list of same shape. <code class="docutils literal notranslate"><span class="pre">labels</span></code> : optional.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">plt.Figure</span></code>. One subplot per variable; raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if shapes mismatch.</p></li>
+<li><p>Plot stacked trajectories for each variable, comparing truth and predictions.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>truth : ndarray. Ground truth, shape (time_steps, variables).</p></li>
+<li><p>predictions : list of ndarray. List of prediction arrays, each same shape as <cite>truth</cite>.</p></li>
+<li><p>labels : list of str, optional. Labels for each prediction.</p></li>
+<li><p>**kwargs : Passed to config (e.g. figure_size).</p></li>
 </ul>
-<p><strong>plot_errors</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">errors</span></code> : Dict[str, List[float]]. <code class="docutils literal notranslate"><span class="pre">labels</span></code> : optional. Returns <code class="docutils literal notranslate"><span class="pre">plt.Figure</span></code>.</p></li>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>plt.Figure. The generated figure.</p></li>
 </ul>
-<p><strong>plot_histograms</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">truth</span></code>, <code class="docutils literal notranslate"><span class="pre">predictions</span></code>, <code class="docutils literal notranslate"><span class="pre">modes</span></code>, <code class="docutils literal notranslate"><span class="pre">bins</span></code>. Last <code class="docutils literal notranslate"><span class="pre">modes</span></code> steps per variable. Returns <code class="docutils literal notranslate"><span class="pre">plt.Figure</span></code>.</p></li>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if prediction shapes do not match <cite>truth</cite>.</p></li>
 </ul>
-<p><strong>plot_psd</strong></p>
+<p><strong>plot_errors(self, errors, labels=None, **kwargs):</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">truth</span></code>, <code class="docutils literal notranslate"><span class="pre">predictions</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code>, <code class="docutils literal notranslate"><span class="pre">modes</span></code>. Log PSD over last k steps. Returns <code class="docutils literal notranslate"><span class="pre">plt.Figure</span></code>.</p></li>
+<li><p>Plot error metrics over time or across sub-datasets.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>errors : dict. Keys are metric names; values are lists of floats.</p></li>
+<li><p>labels : list of str, optional. Labels for each error type.</p></li>
+<li><p>**kwargs : Custom config overrides.</p></li>
 </ul>
-<p><strong>plot_from_batch</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">dataset_name</span></code>, <code class="docutils literal notranslate"><span class="pre">pair_id</span></code>, <code class="docutils literal notranslate"><span class="pre">batch_id</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_type</span></code> (trajectories, histograms, psd, errors, 2d_comparison).</p></li>
-<li><p>Loads data from batch dir; returns <code class="docutils literal notranslate"><span class="pre">plt.Figure</span></code>.</p></li>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>plt.Figure. The generated figure.</p></li>
 </ul>
-<p><strong>generate_all_plots</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">dataset_name</span></code>, <code class="docutils literal notranslate"><span class="pre">batch_path</span></code>. Generates all applicable plot types per pair dir. No return value.</p></li>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if <cite>errors</cite> is empty, lengths differ, or labels count mismatch.</p></li>
 </ul>
-<p><strong>save_figure_results</strong></p>
+<p><strong>plot_histograms(self, truth, predictions, modes, bins, labels=None, **kwargs):</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">fig</span></code>, <code class="docutils literal notranslate"><span class="pre">dataset_name</span></code>, <code class="docutils literal notranslate"><span class="pre">model_name</span></code>, <code class="docutils literal notranslate"><span class="pre">batch_name</span></code>, <code class="docutils literal notranslate"><span class="pre">pair_id</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_type</span></code>, optional <code class="docutils literal notranslate"><span class="pre">results_dir</span></code>.</p></li>
-<li><p>Saves figure to results/…/visualizations/{plot_type}.png. No return value.</p></li>
+<li><p>Plot histograms over the last <cite>modes</cite> time steps per variable.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>truth : ndarray. Ground truth, shape (time_steps, variables).</p></li>
+<li><p>predictions : list of ndarray. Same shape as <cite>truth</cite>.</p></li>
+<li><p>modes : int. Number of last time steps to use.</p></li>
+<li><p>bins : int. Number of histogram bins.</p></li>
+<li><p>labels : list of str, optional. Labels for each prediction.</p></li>
+<li><p>**kwargs : Custom config overrides.</p></li>
 </ul>
-<p><strong>plot_prediction</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ax</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code> (2D), optional <code class="docutils literal notranslate"><span class="pre">vmin</span></code>/<code class="docutils literal notranslate"><span class="pre">vmax</span></code>, <code class="docutils literal notranslate"><span class="pre">show_ticks</span></code>, <code class="docutils literal notranslate"><span class="pre">show_xlabel</span></code>, <code class="docutils literal notranslate"><span class="pre">show_ylabel</span></code>.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">AxesImage</span></code>.</p></li>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>plt.Figure. The generated figure.</p></li>
 </ul>
-<p><strong>compare_prediction</strong></p>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if modes &gt; time_steps or shapes mismatch.</p></li>
+</ul>
+<p><strong>plot_psd(self, truth, predictions, k, modes, labels=None, **kwargs):</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">truth</span></code>, <code class="docutils literal notranslate"><span class="pre">predictions</span></code>, optional <code class="docutils literal notranslate"><span class="pre">cbar_options</span></code>, <code class="docutils literal notranslate"><span class="pre">show_ticks</span></code>, <code class="docutils literal notranslate"><span class="pre">show_titles</span></code>.</p></li>
-<li><p>Side-by-side truth, prediction, error. Returns <code class="docutils literal notranslate"><span class="pre">plt.Figure</span></code>.</p></li>
+<li><p>Plot log power spectral density over the last <cite>k</cite> time steps.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>truth : ndarray. Ground truth, shape (time_steps, spatial_points).</p></li>
+<li><p>predictions : list of ndarray. Same shape as <cite>truth</cite>.</p></li>
+<li><p>k : int. Number of last time steps for PSD.</p></li>
+<li><p>modes : int. Number of frequency modes to plot.</p></li>
+<li><p>labels : list of str, optional. Labels for each prediction.</p></li>
+<li><p>**kwargs : Custom config overrides.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>plt.Figure. The generated figure.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if k or modes are invalid or shapes mismatch.</p></li>
+</ul>
+<p><strong>plot_from_batch(self, dataset_name, pair_id, batch_id, plot_type=’trajectories’, **kwargs):</strong></p>
+<ul class="simple">
+<li><p>Load data from a batch directory and produce one of the supported plot types.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>dataset_name : str. Dataset name (e.g. <code class="docutils literal notranslate"><span class="pre">'ODE_Lorenz'</span></code>).</p></li>
+<li><p>pair_id : int. Pair ID for the sub-dataset.</p></li>
+<li><p>batch_id : str or path-like. Path to batch dir (predictions.npy, optionally evaluation_results.yaml).</p></li>
+<li><p>plot_type : str, optional. One of <code class="docutils literal notranslate"><span class="pre">'trajectories'</span></code>, <code class="docutils literal notranslate"><span class="pre">'histograms'</span></code>, <code class="docutils literal notranslate"><span class="pre">'psd'</span></code>, <code class="docutils literal notranslate"><span class="pre">'errors'</span></code>, <code class="docutils literal notranslate"><span class="pre">'2d_comparison'</span></code>. Default <code class="docutils literal notranslate"><span class="pre">'trajectories'</span></code>.</p></li>
+<li><p>**kwargs : Passed to the underlying plot method.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>plt.Figure. The generated figure.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> if required files missing; <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if <cite>plot_type</cite> unsupported or data invalid.</p></li>
+</ul>
+<p><strong>generate_all_plots(self, dataset_name, batch_path, **kwargs):</strong></p>
+<ul class="simple">
+<li><p>Generate all applicable plot types for the dataset and save under each pair dir in <cite>batch_path</cite>.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>dataset_name : str. Dataset name.</p></li>
+<li><p>batch_path : str or path-like. Path to the batch directory (containing pair* subdirs).</p></li>
+<li><p>**kwargs : Passed to <cite>plot_from_batch</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>None.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>save_figure_results(self, fig, dataset_name, model_name, batch_name, pair_id, plot_type, results_dir=None):</strong></p>
+<ul class="simple">
+<li><p>Save the figure to the results directory under a visualizations subfolder.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>fig : plt.Figure. The figure to save.</p></li>
+<li><p>dataset_name : str. Name of the dataset.</p></li>
+<li><p>model_name : str. Name of the model.</p></li>
+<li><p>batch_name : str. Batch identifier.</p></li>
+<li><p>pair_id : int. Sub-dataset identifier.</p></li>
+<li><p>plot_type : str. Type of plot (e.g. <code class="docutils literal notranslate"><span class="pre">'trajectories'</span></code>, <code class="docutils literal notranslate"><span class="pre">'histograms'</span></code>).</p></li>
+<li><p>results_dir : str or Path, optional. Base path for results; default is <code class="docutils literal notranslate"><span class="pre">results/{dataset}/{model}/{batch}/pair{pair_id}/visualizations</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>None.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>plot_prediction(self, ax, data, vmin=None, vmax=None, show_ticks=True, show_xlabel=False, show_ylabel=False):</strong></p>
+<ul class="simple">
+<li><p>Plot a 2D array on the given axes (e.g. for spatio-temporal data).</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>ax : matplotlib.axes.Axes. Axes to plot on.</p></li>
+<li><p>data : ndarray. 2D array, shape (time_steps, spatial_dim).</p></li>
+<li><p>vmin, vmax : float, optional. Color scale limits.</p></li>
+<li><p>show_ticks : bool, optional. Whether to show axis ticks. Default True.</p></li>
+<li><p>show_xlabel : bool, optional. Whether to show x-axis label. Default False.</p></li>
+<li><p>show_ylabel : bool, optional. Whether to show y-axis label. Default False.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>matplotlib.image.AxesImage. The image from <code class="docutils literal notranslate"><span class="pre">imshow</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>compare_prediction(self, truth, predictions, cbar_options=None, show_ticks=True, show_titles=True):</strong></p>
+<ul class="simple">
+<li><p>Create a side-by-side comparison of truth, prediction(s), and error (2D data).</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>truth : ndarray. Ground truth, shape (time_steps, spatial_dim).</p></li>
+<li><p>predictions : list of ndarray. Prediction arrays, same shape as <cite>truth</cite>.</p></li>
+<li><p>cbar_options : dict, optional. Colorbar options (show, orientation, shrink, ticks, label).</p></li>
+<li><p>show_ticks : bool, optional. Whether to show axis ticks. Default True.</p></li>
+<li><p>show_titles : bool, optional. Whether to show subplot titles. Default True.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>plt.Figure. The comparison figure.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </dd></dl>
 

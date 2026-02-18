@@ -455,35 +455,37 @@
                   
   <section id="module-ctf4science.data_module">
 <span id="ctf4science-data-module"></span><h1>ctf4science.data_module<a class="headerlink" href="#module-ctf4science.data_module" title="Link to this heading">#</a></h1>
+<p>Data Module for CTF models, provides loading and configuration utilities for CTF datasets.</p>
+<p>This module handles train/test pairs, timestep generation for training and evaluation, validation splits, and dataset metadata used by models and the evaluation pipeline.</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.data_module.get_applicable_plots.html#ctf4science.data_module.get_applicable_plots" title="ctf4science.data_module.get_applicable_plots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_applicable_plots</span></code></a>(dataset_name)</p></td>
-<td><p>Retrieve the list of applicable visualizations for the given dataset.</p></td>
+<td><p>Return the list of applicable visualization types for the given dataset.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="ctf4science.data_module.get_config.html#ctf4science.data_module.get_config" title="ctf4science.data_module.get_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_config</span></code></a>(dataset_name)</p></td>
-<td><p>Retrieve the dataset configuration file for the specified dataset.</p></td>
+<td><p>Load and return the dataset configuration for the specified dataset.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.data_module.get_metadata.html#ctf4science.data_module.get_metadata" title="ctf4science.data_module.get_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata</span></code></a>(dataset_name)</p></td>
-<td><p>Retrieve a dictionary of applicable metadata for the given dataset.</p></td>
+<td><p>Return metadata for the given dataset.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="ctf4science.data_module.get_prediction_timesteps.html#ctf4science.data_module.get_prediction_timesteps" title="ctf4science.data_module.get_prediction_timesteps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_prediction_timesteps</span></code></a>(dataset_name, pair_id)</p></td>
-<td><p>Provide a numpy vector containing the time steps at which the prediction matrices need to be evaluated at once a model has been trained.</p></td>
+<td><p>Return time steps at which prediction matrices must be evaluated after training.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.data_module.get_training_timesteps.html#ctf4science.data_module.get_training_timesteps" title="ctf4science.data_module.get_training_timesteps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_training_timesteps</span></code></a>(dataset_name, pair_id)</p></td>
-<td><p>Provide a list of numpy vectors containing the time steps of the training matrices.</p></td>
+<td><p>Return time steps for each training matrix for the given dataset and pair.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="ctf4science.data_module.get_validation_prediction_timesteps.html#ctf4science.data_module.get_validation_prediction_timesteps" title="ctf4science.data_module.get_validation_prediction_timesteps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_validation_prediction_timesteps</span></code></a>(...[, ...])</p></td>
-<td><p>Returns prediction timesteps for validation data.</p></td>
+<td><p>Return prediction timesteps for the validation split.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.data_module.get_validation_training_timesteps.html#ctf4science.data_module.get_validation_training_timesteps" title="ctf4science.data_module.get_validation_training_timesteps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_validation_training_timesteps</span></code></a>(...[, ...])</p></td>
-<td><p>Returns training timesteps for validation data.</p></td>
+<td><p>Return training timesteps used for the validation split.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="ctf4science.data_module.load_dataset.html#ctf4science.data_module.load_dataset" title="ctf4science.data_module.load_dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dataset</span></code></a>(dataset_name, pair_id[, transpose])</p></td>
-<td><p>Load the train and initialization data for a specified dataset and pair ID.</p></td>
+<td><p>Load train and initialization data for a given dataset and pair ID.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.data_module.load_validation_dataset.html#ctf4science.data_module.load_validation_dataset" title="ctf4science.data_module.load_validation_dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_validation_dataset</span></code></a>(dataset_name, pair_id)</p></td>
-<td><p>Load and split dataset into training, validation, and initialization portions.</p></td>
+<td><p>Load dataset and split into training, validation, and initialization.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="ctf4science.data_module.parse_pair_ids.html#ctf4science.data_module.parse_pair_ids" title="ctf4science.data_module.parse_pair_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_pair_ids</span></code></a>(dataset_config)</p></td>
 <td><p>Parse the pair_id configuration to determine which sub-datasets to process.</p></td>

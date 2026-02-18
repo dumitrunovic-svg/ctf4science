@@ -465,22 +465,33 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.eval_module.save_results">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">save_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pair_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="headerlink" href="#ctf4science.eval_module.save_results" title="Link to this definition">#</a></dt>
-<dd><p>Save configuration, predictions, and evaluation results for a specific sub-dataset.</p>
+<dd><p>Save configuration, predictions, and optional evaluation results for a run.</p>
+<p>Writes <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">predictions.npy</span></code>, and optionally
+<code class="docutils literal notranslate"><span class="pre">evaluation_results.yaml</span></code> under <code class="docutils literal notranslate"><span class="pre">results/{dataset_name}/{method_name}/{batch_id}/pair{pair_id}/</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>dataset_name (str): Name of the dataset.</strong></dt><dd></dd>
-<dt><strong>method_name (str): Name of the method or model.</strong></dt><dd></dd>
-<dt><strong>batch_id (str): Batch identifier and folder name for the batch run.</strong></dt><dd></dd>
-<dt><strong>pair_id (int): Sub-dataset identifier.</strong></dt><dd></dd>
-<dt><strong>config (Dict[str, Any]): Configuration dictionary used for the run.</strong></dt><dd></dd>
-<dt><strong>predictions (np.ndarray): Predicted data array.</strong></dt><dd></dd>
-<dt><strong>results (Optional[Dict[str, float]]): Evaluation results dictionary.</strong></dt><dd></dd>
+<dt><strong>dataset_name</strong><span class="classifier">str</span></dt><dd><p>Name of the dataset.</p>
+</dd>
+<dt><strong>method_name</strong><span class="classifier">str</span></dt><dd><p>Name of the method or model.</p>
+</dd>
+<dt><strong>batch_id</strong><span class="classifier">str</span></dt><dd><p>Batch identifier and folder name for the batch run.</p>
+</dd>
+<dt><strong>pair_id</strong><span class="classifier">int or str</span></dt><dd><p>Sub-dataset (pair) identifier.</p>
+</dd>
+<dt><strong>config</strong><span class="classifier">dict</span></dt><dd><p>Configuration dictionary used for the run.</p>
+</dd>
+<dt><strong>predictions</strong><span class="classifier">ndarray</span></dt><dd><p>Predicted data array to save.</p>
+</dd>
+<dt><strong>results</strong><span class="classifier">dict, optional</span></dt><dd><p>Evaluation results (metric name -&gt; score). If None, no
+<code class="docutils literal notranslate"><span class="pre">evaluation_results.yaml</span></code> is written.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>results_dir (Path): Path to the directory containing the run results</dt><dd></dd>
+<dt>pathlib.Path</dt><dd><p>Path to the directory containing the run results.</p>
+</dd>
 </dl>
 </dd>
 </dl>

@@ -499,42 +499,122 @@ seeds. Designed to be run from within each model directory.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><strong>_construct_output_dir</strong></p>
+<p><strong>Class Methods:</strong></p>
+<p><strong>run_benchmark():</strong></p>
 <ul class="simple">
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Path</span></code>: <code class="docutils literal notranslate"><span class="pre">results/benchmark_results/{dataset_name}/{model_name}/pair_id_{pair_id}/{timestamp}/</span></code>.</p></li>
-</ul>
-<p><strong>_create_run_config</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">run_idx</span></code> : int. Index of the run (0-based).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">seed</span></code> : int. Random seed for this run.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Path</span></code>: path to the created config file for the run.</p></li>
-</ul>
-<p><strong>_run_single_evaluation</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">run_idx</span></code> : int. Index of the run.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">seed</span></code> : int. Random seed for this run.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>: run results (run_idx, seed, duration, config_path, results, success) or error info.</p></li>
-</ul>
-<p><strong>_find_and_load_results_for_run</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">run_idx</span></code> : int. Index of the run.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>: evaluation results loaded from <code class="docutils literal notranslate"><span class="pre">evaluation_results.yaml</span></code>.</p></li>
-</ul>
-<p><strong>run_benchmark</strong></p>
-<ul class="simple">
-<li><p>Runs all evaluations, computes statistics (mean/std) when 3+ runs succeed.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>: benchmark_results (model_name, dataset_name, pair_id,
+<li><p>Run multiple benchmarking evaluations and save results. Runs all evaluations,
+computes statistics (mean/std) when 3+ runs succeed.</p></li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>Dict[str, Any] benchmark_results (model_name, dataset_name, pair_id,
 planned_num_runs, successful_runs, run_results, statistics, performance_summary, timestamp, output_file).</p></li>
 </ul>
-<p><strong>_extract_run_results</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">all_runs</span></code> : List[Dict]. List of all run results.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>: run results keyed by <code class="docutils literal notranslate"><span class="pre">run_{n}_seed_{seed}</span></code>.</p></li>
+</dd>
+</dl>
+</li>
 </ul>
-<p><strong>_calculate_statistics</strong></p>
+<p><strong>_construct_output_dir():</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">all_runs</span></code> : List[Dict]. List of all run results.</p></li>
-<li><p>Requires at least 3 successful runs. Returns <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>: metric means, stds, timing stats.</p></li>
+<li><p>Construct the output directory path for benchmark results.</p></li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>Path <code class="docutils literal notranslate"><span class="pre">results/benchmark_results/{dataset_name}/{model_name}/pair_id_{pair_id}/{timestamp}/</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>_create_run_config(self, run_idx, seed):</strong></p>
+<ul class="simple">
+<li><p>Create a configuration file for a specific run with a given seed.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>run_idx : int. Index of the run (0-based).</p></li>
+<li><p>seed : int. Random seed for this run.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>Path to the created config file for the run.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>_run_single_evaluation(self, run_idx, seed):</strong></p>
+<ul class="simple">
+<li><p>Run a single evaluation of the model.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>run_idx : int. Index of the run.</p></li>
+<li><p>seed : int. Random seed for this run.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>Dict[str, Any] run results (run_idx, seed, duration, config_path, results, success) or error info.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>_find_and_load_results_for_run(self, run_idx):</strong></p>
+<ul class="simple">
+<li><p>Find and load the results from the most recent run (for this pair_id).</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>run_idx : int. Index of the run.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>Dict[str, Any] evaluation results loaded from <code class="docutils literal notranslate"><span class="pre">evaluation_results.yaml</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>_extract_run_results(self, all_runs):</strong></p>
+<ul class="simple">
+<li><p>Extract run results for each successful run, keyed by run identifier.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>all_runs : List[Dict]. List of all run results.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>Dict[str, Any] run results keyed by <code class="docutils literal notranslate"><span class="pre">run_{n}_seed_{seed}</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>_calculate_statistics(self, all_runs):</strong></p>
+<ul class="simple">
+<li><p>Calculate mean and standard deviation for all metrics; requires 3+ successful runs.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>all_runs : List[Dict]. List of all run results.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>Dict[str, Any] metric means, stds, timing stats. Requires at least 3 successful runs.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </dd></dl>
 

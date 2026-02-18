@@ -467,9 +467,9 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ctf4science.performance_module.</span></span><span class="sig-name descname"><span class="pre">PerformanceMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctf4science.performance_module.PerformanceMonitor" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Performance monitoring for CTF models (wall-clock time only).</p>
-<p>Tracks total wall-clock time and calculates averages across multiple runs.
-Energy consumption is measured at the SLURM job level using EAR through
-bash scripts.</p>
+<p>Tracks total wall-clock time and calculates averages across multiple
+runs. Energy consumption is measured at the SLURM job level using EAR
+through bash scripts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -483,7 +483,7 @@ bash scripts.</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">record_run</span></code>(run_id, duration)</p></td>
-<td><p>Record a completed run.</p></td>
+<td><p>Record a completed run and update cumulative time and run count.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_monitoring</span></code>()</p></td>
 <td><p>Start monitoring a process or session.</p></td>
@@ -495,26 +495,72 @@ bash scripts.</p>
 </table>
 </div>
 <p class="rubric">Notes</p>
-<p><strong>start_monitoring</strong></p>
+<p><strong>Class Methods:</strong></p>
+<p><strong>start_monitoring():</strong></p>
 <ul class="simple">
-<li><p>Resets total time and run count, records start time. No return value.</p></li>
+<li><p>Start monitoring a process or session. Resets total time and run count,
+and records the current time as session start.</p></li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>None.</p></li>
 </ul>
-<p><strong>record_run</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">run_id</span></code> : str. Unique identifier for the run.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">duration</span></code> : float. Duration of the run in seconds.</p></li>
-<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if duration is negative. No return value.</p></li>
+</dd>
+</dl>
+</li>
 </ul>
-<p><strong>stop_monitoring</strong></p>
+<p><strong>record_run(self, run_id, duration):</strong></p>
 <ul class="simple">
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>: summary metrics (total_num_runs,
-total_run_time_seconds, average_time_per_run_seconds, timestamp, etc.).
-Saves summary to YAML in output_dir.</p></li>
+<li><p>Record a completed run and update cumulative time and run count.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>run_id : str. Unique identifier for the run (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;run_1&quot;</span></code>).</p></li>
+<li><p>duration : float. Duration of the run in seconds.</p></li>
 </ul>
-<p><strong>_save_summary_results</strong></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>None.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if <cite>duration</cite> is negative.</p></li>
+</ul>
+<p><strong>stop_monitoring():</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">metrics</span></code> : Dict[str, Any]. Summary metrics to write to YAML.</p></li>
-<li><p>Internal: writes performance summary file. No return value.</p></li>
+<li><p>Stop monitoring and return summary metrics. Computes total run time,
+average time per run, and session duration; writes a performance
+summary YAML file to <cite>output_dir</cite>. If no session was started, returns
+an empty dict.</p></li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>dict. Summary with keys including <code class="docutils literal notranslate"><span class="pre">total_num_runs</span></code>,
+<code class="docutils literal notranslate"><span class="pre">total_run_time_seconds</span></code>, <code class="docutils literal notranslate"><span class="pre">average_time_per_run_seconds</span></code>,
+<code class="docutils literal notranslate"><span class="pre">total_session_time_seconds</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>, etc.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>_save_summary_results(self, metrics):</strong></p>
+<ul class="simple">
+<li><p>Save summary results to a YAML file in the output directory.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>metrics : dict. Summary metrics to write (e.g. from <cite>stop_monitoring</cite>).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>None. Exceptions during write are logged but not raised.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </dd></dl>
 

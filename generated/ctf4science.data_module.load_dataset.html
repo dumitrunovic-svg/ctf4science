@@ -465,28 +465,35 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.data_module.load_dataset">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.data_module.</span></span><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pair_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ctf4science.data_module.load_dataset" title="Link to this definition">#</a></dt>
-<dd><p>Load the train and initialization data for a specified dataset and pair ID.</p>
+<dd><p>Load train and initialization data for a given dataset and pair ID.</p>
+<p>Training matrices are loaded from the dataset <code class="docutils literal notranslate"><span class="pre">train/</span></code> directory according
+to the pair config; optional initialization matrix is loaded if present.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>dataset_name (str): Name of the dataset (e.g., ‘ODE_Lorenz’, ‘PDE_KS’).</strong></dt><dd></dd>
-<dt><strong>pair_id (int): ID of the train-test pair to load.</strong></dt><dd></dd>
-<dt><strong>transpose (bool, optional): Whether to transpose the matrix. Defaults to True.</strong></dt><dd></dd>
+<dt><strong>dataset_name</strong><span class="classifier">str</span></dt><dd><p>Name of the dataset (e.g. <code class="docutils literal notranslate"><span class="pre">'ODE_Lorenz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'PDE_KS'</span></code>).</p>
+</dd>
+<dt><strong>pair_id</strong><span class="classifier">int</span></dt><dd><p>ID of the train-test pair.</p>
+</dd>
+<dt><strong>transpose</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, transpose each loaded matrix. Default is False.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Tuple[list, Optional[np.ndarray]]: A tuple containing:</dt><dd><ul class="simple">
-<li><p>A list of training data arrays.</p></li>
-<li><p>An array of initialization data if available, otherwise None.</p></li>
-</ul>
+<dt><strong>train_data</strong><span class="classifier">list of ndarray</span></dt><dd><p>List of training data arrays (one per <code class="docutils literal notranslate"><span class="pre">train</span></code> entry in the pair).</p>
+</dd>
+<dt><strong>init_data</strong><span class="classifier">ndarray or None</span></dt><dd><p>Initialization data if the pair defines it, otherwise None.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError: If the pair_id does not exist or any .mat file does not contain exactly one main variable.</dt><dd></dd>
-<dt>FileNotFoundError: If any of the train or initialization .mat files are not found.</dt><dd></dd>
+<dt>ValueError</dt><dd><p>If <cite>pair_id</cite> does not exist, has no training matrices, or a data file
+does not contain exactly one main variable.</p>
+</dd>
+<dt>FileNotFoundError</dt><dd><p>If any train or initialization data file is not found.</p>
+</dd>
 </dl>
 </dd>
 </dl>

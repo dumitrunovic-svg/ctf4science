@@ -465,19 +465,20 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.eval_module.reconstruction">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">reconstruction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">truth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ctf4science.eval_module.reconstruction" title="Link to this definition">#</a></dt>
-<dd><p>Compute the reconstruction error (relative L2 over full trajectory, as percentage).</p>
+<dd><p>Compute the reconstruction score (relative L2 over full trajectory, as percentage).</p>
+<p>Score is <code class="docutils literal notranslate"><span class="pre">100</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">relative_L2_error)</span></code> so that 100 is perfect.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>truth</strong><span class="classifier">np.ndarray</span></dt><dd><p>Ground truth, shape (time steps, features).</p>
+<dt><strong>truth</strong><span class="classifier">(T, F) ndarray</span></dt><dd><p>Ground truth, shape (time steps, features).</p>
 </dd>
-<dt><strong>prediction</strong><span class="classifier">np.ndarray</span></dt><dd><p>Predicted data, same shape as truth.</p>
+<dt><strong>prediction</strong><span class="classifier">(T, F) ndarray</span></dt><dd><p>Predicted data, same shape as <cite>truth</cite>.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>float</dt><dd><p>Reconstruction score as a percentage.</p>
+<dt>float</dt><dd><p>Reconstruction score as a percentage (100 = perfect).</p>
 </dd>
 </dl>
 </dd>

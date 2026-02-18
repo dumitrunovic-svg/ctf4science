@@ -465,7 +465,44 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.benchmark_module.main">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.benchmark_module.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ctf4science.benchmark_module.main" title="Link to this definition">#</a></dt>
-<dd><p>Main function for command line usage.</p>
+<dd><p>Run the ModelBenchmarker class from the command line.</p>
+<p>This function parses command-line arguments for benchmarking a CTF model
+using optimal hyperparameters. It instantiates the ModelBenchmarker class,
+performs the specified number of independent evaluation runs, and prints
+a summary of the benchmark results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>SystemExit</dt><dd><p>If the benchmark fails due to an exception.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>Command-line Arguments:</strong></p>
+<dl class="simple">
+<dt>–config<span class="classifier">str</span></dt><dd><p>Path to the model configuration file (required).</p>
+</dd>
+<dt>–num-evals<span class="classifier">int, optional</span></dt><dd><p>Number of independent evaluation runs to perform (default is 5).</p>
+</dd>
+</dl>
+<p><strong>Side Effects:</strong></p>
+<p>Prints benchmark summary to stdout. On failure, prints an error message and exits with code 1.</p>
+<p class="rubric">Examples</p>
+<dl class="simple">
+<dt>Run from command line:</dt><dd><p>$ python benchmark_module.py –config config.yaml –num-evals 10</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

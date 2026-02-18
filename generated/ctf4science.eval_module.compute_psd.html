@@ -465,28 +465,32 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.eval_module.compute_psd">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">compute_psd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#ctf4science.eval_module.compute_psd" title="Link to this definition">#</a></dt>
-<dd><p>Compute the averaged power spectral density (PSD) over the last k time steps for the specified number of modes.</p>
-<p>This function calculates the PSD for each of the last k time steps by performing a Fast Fourier Transform (FFT),
-computing the power spectrum, shifting it to center the zero-frequency component, and averaging the PSD over these
-time steps for the specified number of modes starting from the center frequency.</p>
+<dd><p>Compute the averaged power spectral density over the last k time steps for the given modes.</p>
+<p>For each of the last <cite>k</cite> time steps, takes the FFT of the spatial dimension,
+computes the power spectrum, FFT-shifts it, and averages the PSD over those
+steps for <cite>modes</cite> Fourier modes starting from the center (zero) frequency.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>array (np.ndarray): Data array with shape (time_steps, spatial_points), where spatial_points is the number</strong></dt><dd><p>of spatial data points and time_steps is the number of time steps.</p>
+<dt><strong>array</strong><span class="classifier">(T, S) ndarray</span></dt><dd><p>Data with shape (time_steps, spatial_points).</p>
 </dd>
-<dt><strong>k (int): Number of last time steps to average over. Must be less than or equal to time_steps.</strong></dt><dd></dd>
-<dt><strong>modes (int): Number of Fourier modes to include in the PSD, starting from the center frequency. Must be less</strong></dt><dd><p>than or equal to spatial_points.</p>
+<dt><strong>k</strong><span class="classifier">int</span></dt><dd><p>Number of last time steps to average over. Must not exceed time_steps.</p>
+</dd>
+<dt><strong>modes</strong><span class="classifier">int</span></dt><dd><p>Number of Fourier modes from the center frequency. Must not exceed
+spatial_points.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>np.ndarray: Averaged PSD for the specified modes, with shape (modes,).</dt><dd></dd>
+<dt>ndarray</dt><dd><p>Averaged PSD for the specified modes, shape <code class="docutils literal notranslate"><span class="pre">(modes,)</span></code>.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError: If k exceeds the number of time_steps or modes exceeds the number of spatial_points.</dt><dd></dd>
+<dt>ValueError</dt><dd><p>If <cite>k</cite> exceeds time_steps or <cite>modes</cite> exceeds spatial_points.</p>
+</dd>
 </dl>
 </dd>
 </dl>

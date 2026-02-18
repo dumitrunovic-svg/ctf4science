@@ -466,22 +466,26 @@
 <dt class="sig sig-object py" id="ctf4science.data_module.parse_pair_ids">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.data_module.</span></span><span class="sig-name descname"><span class="pre">parse_pair_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ctf4science.data_module.parse_pair_ids" title="Link to this definition">#</a></dt>
 <dd><p>Parse the pair_id configuration to determine which sub-datasets to process.</p>
+<p>Resolves <cite>dataset_config</cite> to a list of pair IDs. Supports a single integer,
+a list of integers, a range string (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;1-3&quot;</span></code>), or <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>dataset_config</strong><span class="classifier">Dict[str, Any]</span></dt><dd><p>The ‘dataset’ section from the config file, containing ‘name’ and optionally ‘pair_id’.</p>
+<dt><strong>dataset_config</strong><span class="classifier">dict</span></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">dataset</span></code> section from the config file. Must contain <code class="docutils literal notranslate"><span class="pre">name</span></code>;
+may contain <code class="docutils literal notranslate"><span class="pre">pair_id</span></code> (int, list of int, range string, or <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>).</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>List[int]</dt><dd><p>A list of pair_ids to process.</p>
+<dt>list of int</dt><dd><p>Pair IDs to process for the dataset.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>If the pair_id configuration is invalid or requested pair_ids are unavailable.</p>
+<dt>ValueError</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">name</span></code> is missing, <cite>pair_id</cite> is invalid, or requested pair_ids
+are not in the dataset configuration.</p>
 </dd>
 </dl>
 </dd>

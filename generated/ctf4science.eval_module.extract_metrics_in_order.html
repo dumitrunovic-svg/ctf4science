@@ -465,25 +465,28 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.eval_module.extract_metrics_in_order">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">extract_metrics_in_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ctf4science.eval_module.extract_metrics_in_order" title="Link to this definition">#</a></dt>
-<dd><p>Extract metric values from batch_results in the order defined by the dataset configuration.</p>
+<dd><p>Extract metric values from batch results in the order defined by the dataset config.</p>
+<p>Pairs are processed in ascending <code class="docutils literal notranslate"><span class="pre">pair_id</span></code>; within each pair, metrics
+follow the order in the dataset configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>dataset_name</strong><span class="classifier">str</span></dt><dd><p>Name of the dataset (e.g., “PDE_KS”).</p>
+<dt><strong>dataset_name</strong><span class="classifier">str</span></dt><dd><p>Name of the dataset (e.g. <code class="docutils literal notranslate"><span class="pre">'PDE_KS'</span></code>).</p>
 </dd>
-<dt><strong>batch_results</strong><span class="classifier">Dict[str, Any]</span></dt><dd><p>Dictionary loaded from batch_results.yaml.</p>
+<dt><strong>batch_results</strong><span class="classifier">dict</span></dt><dd><p>Dictionary loaded from batch results (e.g. <code class="docutils literal notranslate"><span class="pre">batch_results.yaml</span></code>),
+with a <code class="docutils literal notranslate"><span class="pre">pairs</span></code> list keyed by <code class="docutils literal notranslate"><span class="pre">pair_id</span></code> and <code class="docutils literal notranslate"><span class="pre">metrics</span></code>.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>List[float]</dt><dd><p>Metric values in the order specified by the dataset config.</p>
+<dt>list of float</dt><dd><p>Metric values in the order specified by the dataset config.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>If a pair or metric is missing in batch_results.</p>
+<dt>ValueError</dt><dd><p>If a pair or metric is missing in <cite>batch_results</cite>.</p>
 </dd>
 </dl>
 </dd>

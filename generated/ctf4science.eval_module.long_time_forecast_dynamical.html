@@ -465,21 +465,27 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.eval_module.long_time_forecast_dynamical">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">long_time_forecast_dynamical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">truth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ctf4science.eval_module.long_time_forecast_dynamical" title="Link to this definition">#</a></dt>
-<dd><p>Compute the long-time forecast error for dynamical systems.</p>
-<p>This function calculates the error based on histograms of the last ‘modes’ time steps for each
-feature, comparing the L-1 normalized histograms of truth and prediction.</p>
+<dd><p>Compute the long-time forecast score for dynamical systems (histogram-based).</p>
+<p>Uses the last <cite>modes</cite> time steps per feature, builds L1-normalized histograms
+with <cite>bins</cite> bins, and compares truth vs prediction. Score is
+<code class="docutils literal notranslate"><span class="pre">100</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">relative_L1_error)</span></code> so that 100 is perfect.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>truth (np.ndarray): Ground truth data array with shape (time steps, features).</strong></dt><dd></dd>
-<dt><strong>prediction (np.ndarray): Predicted data array with shape (time steps, features).</strong></dt><dd></dd>
-<dt><strong>modes (int): Number of last time steps to consider.</strong></dt><dd></dd>
-<dt><strong>bins (int): Number of bins for the histograms.</strong></dt><dd></dd>
+<dt><strong>truth</strong><span class="classifier">(T, F) ndarray</span></dt><dd><p>Ground truth, shape (time steps, features).</p>
+</dd>
+<dt><strong>prediction</strong><span class="classifier">(T, F) ndarray</span></dt><dd><p>Predicted data, same shape as <cite>truth</cite>.</p>
+</dd>
+<dt><strong>modes</strong><span class="classifier">int</span></dt><dd><p>Number of last time steps to use per feature.</p>
+</dd>
+<dt><strong>bins</strong><span class="classifier">int</span></dt><dd><p>Number of histogram bins.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>float: Long-time forecast score as a percentage.</dt><dd></dd>
+<dt>float</dt><dd><p>Long-time forecast score as a percentage (100 = perfect).</p>
+</dd>
 </dl>
 </dd>
 </dl>

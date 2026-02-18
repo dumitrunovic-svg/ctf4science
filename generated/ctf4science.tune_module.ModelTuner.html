@@ -467,8 +467,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ctf4science.tune_module.</span></span><span class="sig-name descname"><span class="pre">ModelTuner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_final_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'score'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_reinit_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_budget_hours</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">24.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_asha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asha_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpus_per_trial</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_performance_monitoring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">performance_output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ray_results_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_opt_main</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctf4science.tune_module.ModelTuner" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Orchestrates hyperparameter tuning for CTF models using Ray Tune.</p>
-<p>Supports tuning with a specific config file or automatically detecting all
-config files in a model’s <code class="docutils literal notranslate"><span class="pre">tuning_config/config_*.yaml</span></code>.</p>
+<p>Supports tuning with a specific config file or automatically detecting
+all config files in a model’s <code class="docutils literal notranslate"><span class="pre">tuning_config/config_*.yaml</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -476,30 +476,30 @@ config files in a model’s <code class="docutils literal notranslate"><span cla
 </dd>
 <dt><strong>model_name</strong><span class="classifier">str, optional</span></dt><dd><p>Model name; if not provided, inferred from config or directory.</p>
 </dd>
-<dt><strong>save_final_config</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to save the final optimal config, by default <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<dt><strong>save_final_config</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to save the final optimal config. Default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </dd>
-<dt><strong>metric</strong><span class="classifier">str, optional</span></dt><dd><p>Metric to optimize, by default <code class="docutils literal notranslate"><span class="pre">&quot;score&quot;</span></code>.</p>
+<dt><strong>metric</strong><span class="classifier">str, optional</span></dt><dd><p>Metric to optimize. Default is <code class="docutils literal notranslate"><span class="pre">&quot;score&quot;</span></code>.</p>
 </dd>
-<dt><strong>mode</strong><span class="classifier">str, optional</span></dt><dd><p>Optimization mode <code class="docutils literal notranslate"><span class="pre">&quot;min&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;max&quot;</span></code>, by default <code class="docutils literal notranslate"><span class="pre">&quot;max&quot;</span></code>.</p>
+<dt><strong>mode</strong><span class="classifier">str, optional</span></dt><dd><p>Optimization mode <code class="docutils literal notranslate"><span class="pre">&quot;min&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;max&quot;</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">&quot;max&quot;</span></code>.</p>
 </dd>
-<dt><strong>ignore_reinit_error</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to ignore Ray reinit errors (dev only), by default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dt><strong>ignore_reinit_error</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to ignore Ray reinit errors (dev only). Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </dd>
-<dt><strong>time_budget_hours</strong><span class="classifier">float, optional</span></dt><dd><p>Max time budget in hours, by default <code class="docutils literal notranslate"><span class="pre">24.0</span></code>.</p>
+<dt><strong>time_budget_hours</strong><span class="classifier">float, optional</span></dt><dd><p>Max time budget in hours. Default is <code class="docutils literal notranslate"><span class="pre">24.0</span></code>.</p>
 </dd>
-<dt><strong>use_asha</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to use ASHA scheduler, by default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dt><strong>use_asha</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to use ASHA scheduler. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </dd>
 <dt><strong>asha_config</strong><span class="classifier">dict, optional</span></dt><dd><p>ASHA config (max_t, grace_period, reduction_factor, brackets).</p>
 </dd>
-<dt><strong>gpus_per_trial</strong><span class="classifier">int, optional</span></dt><dd><p>GPUs per trial (0 = all available), by default <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<dt><strong>gpus_per_trial</strong><span class="classifier">int, optional</span></dt><dd><p>GPUs per trial (0 = all available). Default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 </dd>
-<dt><strong>enable_performance_monitoring</strong><span class="classifier">bool, optional</span></dt><dd><p>Enable performance (time) monitoring, by default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dt><strong>enable_performance_monitoring</strong><span class="classifier">bool, optional</span></dt><dd><p>Enable performance (time) monitoring. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </dd>
 <dt><strong>performance_output_dir</strong><span class="classifier">str, optional</span></dt><dd><p>Directory for performance results.</p>
 </dd>
 <dt><strong>ray_results_dir</strong><span class="classifier">str, optional</span></dt><dd><p>Directory for Ray temporary results.</p>
 </dd>
-<dt><strong>run_opt_main</strong><span class="classifier">Callable[[str], None], optional</span></dt><dd><p>Callable that runs a single optimization trial given a config path
-(typically <code class="docutils literal notranslate"><span class="pre">run_opt.main</span></code> from the model directory).</p>
+<dt><strong>run_opt_main</strong><span class="classifier">callable, optional</span></dt><dd><p>Callable that runs a single optimization trial given a config path
+(typically <code class="docutils literal notranslate"><span class="pre">run_opt.main</span></code> from the model directory). Required.</p>
 </dd>
 </dl>
 </dd>
@@ -508,10 +508,10 @@ config files in a model’s <code class="docutils literal notranslate"><span cla
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_from_cli</span></code>([description])</p></td>
-<td><p>This method provides a simple interface for running tuning from command line.</p></td>
+<td><p>Run tuning from the command line.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_optimization</span></code>()</p></td>
-<td><p>Run the complete optimization workflow.</p></td>
+<td><p>Run the complete hyperparameter optimization workflow.</p></td>
 </tr>
 </tbody>
 </table>
@@ -519,71 +519,216 @@ config files in a model’s <code class="docutils literal notranslate"><span cla
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>If config is missing required sections (dataset, model, hyperparameters),
-or if <code class="docutils literal notranslate"><span class="pre">run_opt_main</span></code> is not provided.</p>
+<dt>ValueError</dt><dd><p>If config is missing required sections (dataset, model, hyperparameters)
+or if <cite>run_opt_main</cite> is not provided.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><strong>_construct_output_dir</strong></p>
+<p><strong>Class Methods:</strong></p>
+<p><strong>run_optimization():</strong></p>
 <ul class="simple">
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Path</span></code>: <code class="docutils literal notranslate"><span class="pre">results/tune_results/{model_name}/{dataset_name}/pair_id_{pair_ids}/{timestamp}/</span></code>.</p></li>
+<li><p>Run the full tuning workflow: create search space, Tuner, fit(), save best config and history when applicable.</p></li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>None.</p></li>
 </ul>
-<p><strong>_infer_model_name</strong> (static)</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">config_path</span></code> : str. Path to the config file.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">str</span></code>: model name inferred from path (e.g. parent of <code class="docutils literal notranslate"><span class="pre">tuning_config</span></code>).</p></li>
+</dd>
+</dl>
+</li>
 </ul>
-<p><strong>_validate_config</strong></p>
+<p><strong>run_from_cli(description):</strong> (static)</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code> : Dict. Configuration dictionary.</p></li>
-<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if required sections missing. No return value.</p></li>
+<li><p>Run tuning from the command line: parse CLI, import model-local <code class="docutils literal notranslate"><span class="pre">run_opt.main</span></code>, run ModelTuner per config.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>description : str, optional. Description for the argument parser. Default <code class="docutils literal notranslate"><span class="pre">&quot;CTF</span> <span class="pre">Model</span> <span class="pre">Hyperparameter</span> <span class="pre">Tuner&quot;</span></code>.</p></li>
 </ul>
-<p><strong>_validate_param_space</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">param_space</span></code> : Dict. Hyperparameter space.</p></li>
-<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if empty or invalid types/bounds. No return value.</p></li>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>None.</p></li>
 </ul>
-<p><strong>_objective</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code> : Dict. Trial hyperparameters.</p></li>
-<li><p>Uses the injected <code class="docutils literal notranslate"><span class="pre">run_opt_main</span></code> callable, then sums results for pair_ids.
-Returns <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">float]</span></code> with the optimization metric.</p></li>
+</dd>
+</dl>
+</li>
 </ul>
-<p><strong>_parse_pair_ids</strong> (static)</p>
+<p><strong>_construct_output_dir():</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">dataset_config</span></code> : Dict. Dataset section of config.</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Optional[List[int]]</span></code>: pair_ids or None for ‘all’.</p></li>
+<li><p>Construct the output directory path from model, dataset, and pair_id.
+Structure: <code class="docutils literal notranslate"><span class="pre">results/tune_results/{model_name}/{dataset_name}/pair_id_{pair_ids}/{timestamp}/</span></code>.</p></li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>Path. Constructed output directory path.</p></li>
 </ul>
-<p><strong>_sum_results</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">results</span></code> : dict. Results from run_opt (pairs with metrics).</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">float</span></code>: sum of all metric values.</p></li>
+</dd>
+</dl>
+</li>
 </ul>
-<p><strong>_create_search_space</strong></p>
+<p><strong>_infer_model_name(config_path):</strong> (static)</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">tuning_config</span></code> : Dict. Hyperparameter spec (type, lower_bound, upper_bound, etc.).</p></li>
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>: Ray Tune search space.</p></li>
+<li><p>Infer model name from directory structure (e.g. parent of <code class="docutils literal notranslate"><span class="pre">tuning_config</span></code>).</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>config_path : str. Path to the config file.</p></li>
 </ul>
-<p><strong>_generate_config</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code> : Dict. Selected hyperparameters. <code class="docutils literal notranslate"><span class="pre">template</span></code> : Dict. Config template. <code class="docutils literal notranslate"><span class="pre">name</span></code> : str. Output filename base.</p></li>
-<li><p>Writes YAML to output_dir. Returns <code class="docutils literal notranslate"><span class="pre">str</span></code>: path to generated file.</p></li>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>str. Inferred model name.</p></li>
 </ul>
-<p><strong>_get_resources</strong></p>
-<ul class="simple">
-<li><p>Returns <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>: <code class="docutils literal notranslate"><span class="pre">cpu</span></code> and <code class="docutils literal notranslate"><span class="pre">gpu</span></code> resource config for Ray Tune.</p></li>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if model name cannot be inferred.</p></li>
 </ul>
-<p><strong>run_optimization</strong></p>
+<p><strong>_validate_config(self, config):</strong></p>
 <ul class="simple">
-<li><p>Runs full tuning: creates search space, Tuner, fit(). Saves best config and history when save_final_config is True. No return value.</p></li>
+<li><p>Validate that the configuration contains required sections: dataset, model, hyperparameters.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>config : dict. Configuration dictionary to validate.</p></li>
 </ul>
-<p><strong>run_from_cli</strong> (static)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>None.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if required sections are missing or invalid.</p></li>
+</ul>
+<p><strong>_validate_param_space(self, param_space):</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> : str. Parser description.</p></li>
-<li><p>Parses CLI, imports the model-local <code class="docutils literal notranslate"><span class="pre">run_opt.main</span></code>, and runs ModelTuner for each config.
-No return value.</p></li>
+<li><p>Validate the parameter space (types, bounds, choices, etc.).</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>param_space : dict. Parameter space dictionary to validate.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>None.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if parameter space is empty or invalid.</p></li>
+</ul>
+<p><strong>_objective(self, config):</strong></p>
+<ul class="simple">
+<li><p>Objective function for Ray Tune: generate config, run model via <code class="docutils literal notranslate"><span class="pre">run_opt_main</span></code>, sum results.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>config : dict. Trial hyperparameter configuration.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>Dict[str, float]. Dictionary with the optimization metric (e.g. score).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>_parse_pair_ids(dataset_config):</strong> (static)</p>
+<ul class="simple">
+<li><p>Parse pair_id from dataset config (int, list of int, or <code class="docutils literal notranslate"><span class="pre">'all'</span></code>).</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>dataset_config : dict. The <code class="docutils literal notranslate"><span class="pre">dataset</span></code> section from the config file.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>list of int or None. Pair IDs to optimize for, or None for all pairs.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if pair_id is not int, list of ints, or <code class="docutils literal notranslate"><span class="pre">'all'</span></code>.</p></li>
+</ul>
+<p><strong>_sum_results(self, results):</strong></p>
+<ul class="simple">
+<li><p>Sum metric values from the results dictionary (all pairs in <code class="docutils literal notranslate"><span class="pre">results['pairs']</span></code>).</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>results : dict. Evaluation results from run_opt (pairs with metrics).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>float. Sum of all metric values.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>_create_search_space(self, tuning_config):</strong></p>
+<ul class="simple">
+<li><p>Build a Ray Tune search space dictionary from the tuning config.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>tuning_config : dict. Hyperparameter spec (type, lower_bound, upper_bound, choices, etc.).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>dict. Ray Tune search space.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Raises <code class="docutils literal notranslate"><span class="pre">Exception</span></code> if required keys or types are missing or unsupported.</p></li>
+</ul>
+<p><strong>_generate_config(self, config, template, name):</strong></p>
+<ul class="simple">
+<li><p>Generate a YAML config file with the given hyperparameters and save to output_dir.</p></li>
+<li><dl class="simple">
+<dt>Parameters:</dt><dd><ul>
+<li><p>config : dict. Selected hyperparameters.</p></li>
+<li><p>template : dict. Config template to fill.</p></li>
+<li><p>name : str. Output filename base (without extension).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>str. Path to the generated configuration file.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>_get_resources():</strong></p>
+<ul class="simple">
+<li><p>Get resource configuration (cpu, gpu) for Ray Tune trials.</p></li>
+<li><dl class="simple">
+<dt>Returns:</dt><dd><ul>
+<li><p>dict. Keys <code class="docutils literal notranslate"><span class="pre">cpu</span></code> and <code class="docutils literal notranslate"><span class="pre">gpu</span></code> for per-trial resources.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </dd></dl>
 

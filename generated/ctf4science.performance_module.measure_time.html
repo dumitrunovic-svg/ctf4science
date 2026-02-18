@@ -465,27 +465,32 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.performance_module.measure_time">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.performance_module.</span></span><span class="sig-name descname"><span class="pre">measure_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ctf4science.performance_module.measure_time" title="Link to this definition">#</a></dt>
-<dd><p>Measure wall-clock time for any function.</p>
+<dd><p>Measure wall-clock time for a single call to a callable.</p>
+<p>Executes <cite>func(*args, **kwargs)</cite> and returns its result together with
+the elapsed time in seconds. Any exception raised by <cite>func</cite> is logged
+and re-raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>func</strong><span class="classifier">Callable</span></dt><dd><p>Function to measure.</p>
+<dt><strong>func</strong><span class="classifier">callable</span></dt><dd><p>Callable to invoke (e.g. a function or lambda).</p>
 </dd>
-<dt><strong>*args</strong></dt><dd><p>Positional arguments for the function.</p>
+<dt><strong>*args</strong><span class="classifier">tuple, optional</span></dt><dd><p>Positional arguments passed to <cite>func</cite>.</p>
 </dd>
-<dt><strong>**kwargs</strong></dt><dd><p>Keyword arguments for the function.</p>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Keyword arguments passed to <cite>func</cite>.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Tuple[Any, float]</dt><dd><p>(function result, duration in seconds).</p>
+<dt><strong>result</strong><span class="classifier">any</span></dt><dd><p>Return value of <cite>func(*args, **kwargs)</cite>.</p>
+</dd>
+<dt><strong>duration</strong><span class="classifier">float</span></dt><dd><p>Elapsed wall-clock time in seconds.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>Exception</dt><dd><p>If the function execution raises an exception.</p>
+<dt>Exception</dt><dd><p>Re-raised if <cite>func</cite> raises; the exception is logged before re-raising.</p>
 </dd>
 </dl>
 </dd>

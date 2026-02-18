@@ -465,32 +465,27 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.data_module.get_training_timesteps">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.data_module.</span></span><span class="sig-name descname"><span class="pre">get_training_timesteps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pair_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ctf4science.data_module.get_training_timesteps" title="Link to this definition">#</a></dt>
-<dd><p>Provide a list of numpy vectors containing the time steps of the training
-matrices.</p>
+<dd><p>Return time steps for each training matrix for the given dataset and pair.</p>
+<p>One 1D array per training matrix in the pair, built from metadata
+(<code class="docutils literal notranslate"><span class="pre">matrix_shapes</span></code>, <code class="docutils literal notranslate"><span class="pre">matrix_start_index</span></code>, <code class="docutils literal notranslate"><span class="pre">delta_t</span></code>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>dataset_name (str): Name of the dataset (e.g., ‘ODE_Lorenz’, ‘PDE_KS’).</strong></dt><dd></dd>
-<dt><strong>pair_id (int): ID of the train-test pair to load.</strong></dt><dd></dd>
+<dt><strong>dataset_name</strong><span class="classifier">str</span></dt><dd><p>Name of the dataset (e.g. <code class="docutils literal notranslate"><span class="pre">'ODE_Lorenz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'PDE_KS'</span></code>).</p>
+</dd>
+<dt><strong>pair_id</strong><span class="classifier">int</span></dt><dd><p>ID of the train-test pair.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>list(np.ndarray): A list of 1D numpy vectors containing time-steps of the training</dt><dd><p>matrices from the given the dataset_name and pair_id.</p>
+<dt>list of ndarray</dt><dd><p>List of 1D arrays of time steps, one per training matrix.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError: If the dataset configuration does not contain enough information</dt><dd><p>to generate the output prediction timesteps vector. This can
-happen from any of the following:
-- ‘pair_id’ doesn’t exist in config
-- ‘train’ matrix not defined in pair_id
-- ‘metadata’ does not exist in config
-- ‘metadata’ does not have ‘matrix_shapes’ or ‘matrix_start_index’
-- ‘metadata’ does not have train matrix shape
-- ‘metadata’ does not have train matrix starting index
-- ‘delta_t’ does not exist in metadata</p>
+<dt>ValueError</dt><dd><p>If <cite>pair_id</cite> is missing, train matrices or metadata are missing.</p>
 </dd>
 </dl>
 </dd>

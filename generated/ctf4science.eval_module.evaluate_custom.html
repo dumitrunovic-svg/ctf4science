@@ -465,28 +465,36 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.eval_module.evaluate_custom">
 <span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">evaluate_custom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pair_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ctf4science.eval_module.evaluate_custom" title="Link to this definition">#</a></dt>
-<dd><p>Evaluate the prediction using specified metrics and truth array. The truth array is provided in this function, use <cite>evaluate</cite> for loading ground-truth truth array.</p>
-<p>This function loads the dataset configuration, retrieves the ground truth test data internally,
-determines the metrics to compute, and calculates the evaluation scores based on the dataset type
-and specified parameters.</p>
+<dd><p>Evaluate the prediction against a provided truth array using specified metrics.</p>
+<p>Uses the given <cite>truth</cite> and <cite>prediction</cite> arrays and the dataset config to
+determine evaluation parameters and long-time evaluation type. Use <cite>evaluate</cite>
+to load ground-truth test data internally instead.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>dataset_name (str): Name of the dataset (e.g., ‘ODE_Lorenz’, ‘PDE_KS’).</strong></dt><dd></dd>
-<dt><strong>pair_id (int): ID of the train-test pair to use.</strong></dt><dd></dd>
-<dt><strong>truth (np.ndarray): True data array.</strong></dt><dd></dd>
-<dt><strong>prediction (np.ndarray): Predicted data array.</strong></dt><dd></dd>
-<dt><strong>metrics (Optional[List[str]]): List of metrics to compute. If None, uses defaults from config.</strong></dt><dd></dd>
+<dt><strong>dataset_name</strong><span class="classifier">str</span></dt><dd><p>Name of the dataset (e.g. <code class="docutils literal notranslate"><span class="pre">'ODE_Lorenz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'PDE_KS'</span></code>).</p>
+</dd>
+<dt><strong>pair_id</strong><span class="classifier">int</span></dt><dd><p>ID of the train-test pair (used to select config and metrics).</p>
+</dd>
+<dt><strong>truth</strong><span class="classifier">ndarray</span></dt><dd><p>Ground truth data array.</p>
+</dd>
+<dt><strong>prediction</strong><span class="classifier">ndarray</span></dt><dd><p>Predicted data array, same shape as <cite>truth</cite>.</p>
+</dd>
+<dt><strong>metrics</strong><span class="classifier">list of str, optional</span></dt><dd><p>Metrics to compute. If None, uses the pair’s default metrics from config.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Dict[str, float]: Dictionary containing the computed metrics.</dt><dd></dd>
+<dt>dict</dt><dd><p>Mapping from metric name to computed score (float).</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError: If an unknown dataset type, metric, or invalid pair_id is specified.</dt><dd></dd>
+<dt>ValueError</dt><dd><p>If <cite>pair_id</cite> is invalid, an unknown metric is requested, or the dataset
+long-time evaluation type is unknown.</p>
+</dd>
 </dl>
 </dd>
 </dl>
