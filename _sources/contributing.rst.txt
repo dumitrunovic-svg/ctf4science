@@ -121,7 +121,7 @@ Testing is essential to ensure the reliability of the framework. We use Python's
 * **Writing Tests**:
 
   * Write unit tests for new functions, classes, or bug fixes.
-  * Place tests in the ``tests`` directory, following the naming convention ``test_<module>.py``.
+  * Place tests in the ``test`` directory, following the naming convention ``test_<module>.py``.
   * Use ``assert`` methods to verify expected behavior (e.g., ``self.assertEqual``, ``self.assertRaises``).
 
 * **Running Tests**:
