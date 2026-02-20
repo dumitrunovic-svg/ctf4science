@@ -405,6 +405,7 @@
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.compute_psd.html">ctf4science.eval_module.compute_psd</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.evaluate.html">ctf4science.eval_module.evaluate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.evaluate_custom.html">ctf4science.eval_module.evaluate_custom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.evaluate_kaggle_csv.html">ctf4science.eval_module.evaluate_kaggle_csv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.extract_metrics_in_order.html">ctf4science.eval_module.extract_metrics_in_order</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_dynamical.html">ctf4science.eval_module.long_time_forecast_dynamical</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_spatio_temporal.html">ctf4science.eval_module.long_time_forecast_spatio_temporal</a></li>
@@ -510,22 +511,25 @@
 <tr class="row-even"><td><p><a class="reference internal" href="ctf4science.eval_module.evaluate_custom.html#ctf4science.eval_module.evaluate_custom" title="ctf4science.eval_module.evaluate_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_custom</span></code></a>(dataset_name, pair_id, ...)</p></td>
 <td><p>Evaluate the prediction against a provided truth array using specified metrics.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.eval_module.extract_metrics_in_order.html#ctf4science.eval_module.extract_metrics_in_order" title="ctf4science.eval_module.extract_metrics_in_order"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_metrics_in_order</span></code></a>(dataset_name, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.eval_module.evaluate_kaggle_csv.html#ctf4science.eval_module.evaluate_kaggle_csv" title="ctf4science.eval_module.evaluate_kaggle_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_kaggle_csv</span></code></a>(csv_path, dataset_name)</p></td>
+<td><p>Evaluate the predictions from a Kaggle CSV file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ctf4science.eval_module.extract_metrics_in_order.html#ctf4science.eval_module.extract_metrics_in_order" title="ctf4science.eval_module.extract_metrics_in_order"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_metrics_in_order</span></code></a>(dataset_name, ...)</p></td>
 <td><p>Extract metric values from batch results in the order defined by the dataset config.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_dynamical.html#ctf4science.eval_module.long_time_forecast_dynamical" title="ctf4science.eval_module.long_time_forecast_dynamical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">long_time_forecast_dynamical</span></code></a>(truth, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_dynamical.html#ctf4science.eval_module.long_time_forecast_dynamical" title="ctf4science.eval_module.long_time_forecast_dynamical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">long_time_forecast_dynamical</span></code></a>(truth, ...)</p></td>
 <td><p>Compute the long-time forecast score for dynamical systems (histogram-based).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_spatio_temporal.html#ctf4science.eval_module.long_time_forecast_spatio_temporal" title="ctf4science.eval_module.long_time_forecast_spatio_temporal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">long_time_forecast_spatio_temporal</span></code></a>(truth, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_spatio_temporal.html#ctf4science.eval_module.long_time_forecast_spatio_temporal" title="ctf4science.eval_module.long_time_forecast_spatio_temporal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">long_time_forecast_spatio_temporal</span></code></a>(truth, ...)</p></td>
 <td><p>Compute the long-time forecast score for spatio-temporal systems (spectral).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ctf4science.eval_module.reconstruction.html#ctf4science.eval_module.reconstruction" title="ctf4science.eval_module.reconstruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reconstruction</span></code></a>(truth, prediction)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.eval_module.reconstruction.html#ctf4science.eval_module.reconstruction" title="ctf4science.eval_module.reconstruction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reconstruction</span></code></a>(truth, prediction)</p></td>
 <td><p>Compute the reconstruction score (relative L2 over full trajectory, as percentage).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.eval_module.save_results.html#ctf4science.eval_module.save_results" title="ctf4science.eval_module.save_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_results</span></code></a>(dataset_name, method_name, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="ctf4science.eval_module.save_results.html#ctf4science.eval_module.save_results" title="ctf4science.eval_module.save_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_results</span></code></a>(dataset_name, method_name, ...)</p></td>
 <td><p>Save configuration, predictions, and optional evaluation results for a run.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="ctf4science.eval_module.short_time_forecast.html#ctf4science.eval_module.short_time_forecast" title="ctf4science.eval_module.short_time_forecast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">short_time_forecast</span></code></a>(truth, prediction, k)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="ctf4science.eval_module.short_time_forecast.html#ctf4science.eval_module.short_time_forecast" title="ctf4science.eval_module.short_time_forecast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">short_time_forecast</span></code></a>(truth, prediction, k)</p></td>
 <td><p>Compute the short-time forecast score (relative L2 over first k steps, as percentage).</p></td>
 </tr>
 </tbody>

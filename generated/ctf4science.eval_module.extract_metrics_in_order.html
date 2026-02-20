@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="ctf4science.eval_module.long_time_forecast_dynamical" href="ctf4science.eval_module.long_time_forecast_dynamical.html" />
-    <link rel="prev" title="ctf4science.eval_module.evaluate_custom" href="ctf4science.eval_module.evaluate_custom.html" />
+    <link rel="prev" title="ctf4science.eval_module.evaluate_kaggle_csv" href="ctf4science.eval_module.evaluate_kaggle_csv.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -409,6 +409,7 @@
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.compute_psd.html">ctf4science.eval_module.compute_psd</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.evaluate.html">ctf4science.eval_module.evaluate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.evaluate_custom.html">ctf4science.eval_module.evaluate_custom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.evaluate_kaggle_csv.html">ctf4science.eval_module.evaluate_kaggle_csv</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">ctf4science.eval_module.extract_metrics_in_order</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_dynamical.html">ctf4science.eval_module.long_time_forecast_dynamical</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_spatio_temporal.html">ctf4science.eval_module.long_time_forecast_spatio_temporal</a></li>
@@ -502,7 +503,7 @@
 <h1>ctf4science.eval_module.extract_metrics_in_order<a class="headerlink" href="#ctf4science-eval-module-extract-metrics-in-order" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="ctf4science.eval_module.extract_metrics_in_order">
-<span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">extract_metrics_in_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ctf4science.eval_module.extract_metrics_in_order" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">extract_metrics_in_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ctf4science.eval_module.extract_metrics_in_order" title="Link to this definition">#</a></dt>
 <dd><p>Extract metric values from batch results in the order defined by the dataset config.</p>
 <p>Pairs are processed in ascending <code class="docutils literal notranslate"><span class="pre">pair_id</span></code>; within each pair, metrics
 follow the order in the dataset configuration.</p>
@@ -544,12 +545,12 @@ with a <code class="docutils literal notranslate"><span class="pre">pairs</span>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ctf4science.eval_module.evaluate_custom.html"
+       href="ctf4science.eval_module.evaluate_kaggle_csv.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ctf4science.eval_module.evaluate_custom</p>
+        <p class="prev-next-title">ctf4science.eval_module.evaluate_kaggle_csv</p>
       </div>
     </a>
     <a class="right-next"

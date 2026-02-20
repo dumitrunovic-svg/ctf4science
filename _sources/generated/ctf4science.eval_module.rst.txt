@@ -16,6 +16,7 @@ ctf4science.eval\_module
       compute_psd
       evaluate
       evaluate_custom
+      evaluate_kaggle_csv
       extract_metrics_in_order
       long_time_forecast_dynamical
       long_time_forecast_spatio_temporal

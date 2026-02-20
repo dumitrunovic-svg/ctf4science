@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ctf4science.eval_module.reconstruction &#8212; CTF for Science Documentation</title>
+    <title>ctf4science.eval_module.evaluate_kaggle_csv &#8212; CTF for Science Documentation</title>
   
   
   
@@ -43,11 +43,11 @@
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/ctf4science.eval_module.reconstruction';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/ctf4science.eval_module.evaluate_kaggle_csv';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ctf4science.eval_module.save_results" href="ctf4science.eval_module.save_results.html" />
-    <link rel="prev" title="ctf4science.eval_module.long_time_forecast_spatio_temporal" href="ctf4science.eval_module.long_time_forecast_spatio_temporal.html" />
+    <link rel="next" title="ctf4science.eval_module.extract_metrics_in_order" href="ctf4science.eval_module.extract_metrics_in_order.html" />
+    <link rel="prev" title="ctf4science.eval_module.evaluate_custom" href="ctf4science.eval_module.evaluate_custom.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -409,11 +409,11 @@
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.compute_psd.html">ctf4science.eval_module.compute_psd</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.evaluate.html">ctf4science.eval_module.evaluate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.evaluate_custom.html">ctf4science.eval_module.evaluate_custom</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.evaluate_kaggle_csv.html">ctf4science.eval_module.evaluate_kaggle_csv</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">ctf4science.eval_module.evaluate_kaggle_csv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.extract_metrics_in_order.html">ctf4science.eval_module.extract_metrics_in_order</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_dynamical.html">ctf4science.eval_module.long_time_forecast_dynamical</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.long_time_forecast_spatio_temporal.html">ctf4science.eval_module.long_time_forecast_spatio_temporal</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">ctf4science.eval_module.reconstruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.reconstruction.html">ctf4science.eval_module.reconstruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.save_results.html">ctf4science.eval_module.save_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ctf4science.eval_module.short_time_forecast.html">ctf4science.eval_module.short_time_forecast</a></li>
 </ul>
@@ -482,7 +482,7 @@
     
     <li class="breadcrumb-item"><a href="ctf4science.eval_module.html" class="nav-link">ctf4science.eval_module</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ctf4science.eval_module.reconstruction</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ctf4science.eval_module.evaluate_kaggle_csv</span></li>
   </ul>
 </nav>
 </div>
@@ -499,29 +499,45 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="ctf4science-eval-module-reconstruction">
-<h1>ctf4science.eval_module.reconstruction<a class="headerlink" href="#ctf4science-eval-module-reconstruction" title="Link to this heading">#</a></h1>
+  <section id="ctf4science-eval-module-evaluate-kaggle-csv">
+<h1>ctf4science.eval_module.evaluate_kaggle_csv<a class="headerlink" href="#ctf4science-eval-module-evaluate-kaggle-csv" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="ctf4science.eval_module.reconstruction">
-<span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">reconstruction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">truth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ctf4science.eval_module.reconstruction" title="Link to this definition">#</a></dt>
-<dd><p>Compute the reconstruction score (relative L2 over full trajectory, as percentage).</p>
-<p>Score is <code class="docutils literal notranslate"><span class="pre">100</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">relative_L2_error)</span></code> so that 100 is perfect.</p>
+<dt class="sig sig-object py" id="ctf4science.eval_module.evaluate_kaggle_csv">
+<span class="sig-prename descclassname"><span class="pre">ctf4science.eval_module.</span></span><span class="sig-name descname"><span class="pre">evaluate_kaggle_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ctf4science.eval_module.evaluate_kaggle_csv" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the predictions from a Kaggle CSV file.</p>
+<p>Loads the CSV, groups rows by pair_id, converts each group to a (T, 3)
+prediction matrix, and runs the standard CTF evaluation for each pair.
+Returns per-pair metrics, E1–E12 in order, and their average (score).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>truth</strong><span class="classifier">(T, F) ndarray</span></dt><dd><p>Ground truth, shape (time steps, features).</p>
+<dt><strong>csv_path</strong><span class="classifier">str</span></dt><dd><p>Path to the Kaggle CSV file.</p>
 </dd>
-<dt><strong>prediction</strong><span class="classifier">(T, F) ndarray</span></dt><dd><p>Predicted data, same shape as <cite>truth</cite>.</p>
+<dt><strong>dataset_name</strong><span class="classifier">str</span></dt><dd><p>Dataset name used for config and ground-truth loading.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>float</dt><dd><p>Reconstruction score as a percentage (100 = perfect).</p>
+<dt>dict</dt><dd><p>Computed metrics: keys <code class="docutils literal notranslate"><span class="pre">pair_{id}_{metric}</span></code> for each pair and metric,
+<code class="docutils literal notranslate"><span class="pre">E1</span></code>–<code class="docutils literal notranslate"><span class="pre">E12</span></code> for the ordered metric list, and <code class="docutils literal notranslate"><span class="pre">average</span></code> for the
+mean of E1–E12.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>CSVs have the following format:</p>
+<p>pair_id,timestep,x,y,z
+1,0,value,value,value
+1,1,value,value,value
+1,2,value,value,value
+…
+1,999,value,value,value
+2,0,value,value,value
+2,1,value,value,value
+…
+9,999,value,value,value</p>
 </dd></dl>
 
 </section>
@@ -537,20 +553,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ctf4science.eval_module.long_time_forecast_spatio_temporal.html"
+       href="ctf4science.eval_module.evaluate_custom.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ctf4science.eval_module.long_time_forecast_spatio_temporal</p>
+        <p class="prev-next-title">ctf4science.eval_module.evaluate_custom</p>
       </div>
     </a>
     <a class="right-next"
-       href="ctf4science.eval_module.save_results.html"
+       href="ctf4science.eval_module.extract_metrics_in_order.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">ctf4science.eval_module.save_results</p>
+        <p class="prev-next-title">ctf4science.eval_module.extract_metrics_in_order</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -573,7 +589,7 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ctf4science.eval_module.reconstruction"><code class="docutils literal notranslate"><span class="pre">reconstruction()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ctf4science.eval_module.evaluate_kaggle_csv"><code class="docutils literal notranslate"><span class="pre">evaluate_kaggle_csv()</span></code></a></li>
 </ul>
   </nav></div>
 
