@@ -180,10 +180,10 @@ cython_debug/
 .DS_Store
 .vscode/
 results/
-Errors.md
-test.py
 lightning_logs/
 notebooks/*.csv
 notebooks/*.pdf
 notebooks/*.tex
 data/
+docs/source/generated
+docs/build
