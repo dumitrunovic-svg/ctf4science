@@ -8,9 +8,9 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import yaml
-from matplotlib import colormaps
+from matplotlib import colormaps, patches
 
-from ctf4science.data_module import _load_test_data, get_applicable_plots
+from ctf4science.data_module import _load_test_data, get_applicable_plots, load_nodes
 from ctf4science.eval_module import compute_log_psd
 
 file_dir = Path(__file__).parent
@@ -482,6 +482,22 @@ class Visualization:
                         f"2d_comparison requires 2D data, but shapes are {test_data.shape} and {predictions[0].shape}"
                     )
             return self.compare_prediction(test_data, predictions, **kwargs)
+        elif plot_type == "spatial_averages":
+            num_fields = eval_params.get("num_fields", 1)
+            return self.plot_spatial_averages(test_data, predictions, num_fields, **kwargs)
+        elif plot_type == "contour2d":
+            num_fields = eval_params.get("num_fields", 1)
+
+            # Load nodes for contour plotting (e.g. for MSFR)
+            nodes = load_nodes(dataset_name)
+
+            fig =  self.plot_2d_contours(nodes, test_data, predictions, num_fields, **kwargs)
+
+            # Add blanket for MSFR
+            if dataset_name == "msfr":
+                add_blanket_msfr(fig)
+
+            return fig
         else:
             raise ValueError(f"Unknown plot type: {plot_type}")
 
@@ -692,3 +708,138 @@ class Visualization:
             if label:
                 cbar.set_label(label)  # type: ignore[arg-type]
         return fig
+
+    def plot_spatial_averages(self, truth, predictions, num_fields, **kwargs):
+        r"""
+        Plot spatial average quantities over time for truth and predictions.
+
+        Parameters
+        ----------
+        truth : ndarray
+            Ground truth, shape (time_steps, spatial_dim).
+        predictions : list of ndarray
+            Prediction arrays, each same shape as `truth`.
+        num_fields : int
+            Number of fields to average.
+        \*\*kwargs
+            Override config (e.g. ``figure_size``).
+
+        Returns
+        -------
+        matplotlib.figure.Figure
+            The generated figure comparing spatial averages.
+        """
+        config = {**self.config, **kwargs}
+        Nh = truth.shape[1] // num_fields
+        time_steps = truth.shape[0]
+
+        for pred in predictions:
+            if pred.shape != truth.shape:
+                raise ValueError(f"Prediction shape {pred.shape} does not match truth shape {truth.shape}")
+            
+        labels = [f"Prediction {i + 1}" for i in range(len(predictions))]
+
+        fig, axs = plt.subplots(num_fields, 1, figsize=config.get("figure_size", (num_fields * 6, 4)), sharex=True)
+        time = np.arange(time_steps)
+        cmap = colormaps.get_cmap(config["colors"]["predictions"])
+        colors = [cmap(i / max(1, len(predictions) - 1)) for i in range(len(predictions))]
+
+        for ii in range(num_fields):
+            ax = axs[ii] if num_fields > 1 else axs  # type: ignore[index]
+            truth_avg = truth[:, ii * Nh : (ii + 1) * Nh].mean(axis=1)
+            ax.plot(time, truth_avg, label="Truth", color=config["colors"]["truth"], linestyle=config["linestyles"]["truth"])
+            for j, pred in enumerate(predictions):
+                pred_avg = pred[:, ii * Nh : (ii + 1) * Nh].mean(axis=1)
+                ax.plot(time, pred_avg, label=labels[j], color=colors[j], linestyle=config["linestyles"]["predictions"])
+            ax.set_ylabel("Field " + str(ii + 1))
+            ax.legend()
+
+        if num_fields > 1:
+            axs[-1].set_xlabel("Time") 
+        else:
+            axs.set_xlabel("Time")  # type: ignore[union-attr]
+
+        plt.tight_layout()
+        return fig
+    
+    def plot_2d_contours(self, nodes, truth, predictions, num_fields, 
+                         time_step = -1, 
+                         levels = 30, **kwargs):
+        r"""
+        Plot contour comparisons of truth and predictions for spatial fields.
+
+        Parameters
+        ----------
+        nodes : ndarray
+            Spatial node coordinates, shape (Nh, 2)
+        truth : ndarray
+            Ground truth, shape (time_steps, spatial_dim).
+        predictions : list of ndarray
+            Prediction arrays, each same shape as `truth`.
+        num_fields : int
+            Number of fields to plot.
+        levels : int, optional
+            Number of contour levels.
+        cmap : str, optional
+            Colormap for the contours.
+        \*\*kwargs
+            Override config (e.g. ``figure_size``).
+
+        """
+
+        config = {**self.config, **kwargs}
+        Nh = truth.shape[1] // num_fields
+
+        for pred in predictions:
+            if pred.shape != truth.shape:
+                raise ValueError(f"Prediction shape {pred.shape} does not match truth shape {truth.shape}")
+            
+        labels = [f"Prediction {i + 1}" for i in range(len(predictions))]
+
+        nrows = len(predictions) + 1  # one row for truth, one for each prediction
+        ncols = num_fields
+
+        fig, axs = plt.subplots(nrows, ncols, figsize=(ncols * 5, nrows * 4), sharex=True, sharey=True)
+
+        for ii in range(num_fields):
+            _min = min(truth[time_step, ii * Nh : (ii + 1) * Nh])
+            _max = max(truth[time_step, ii * Nh : (ii + 1) * Nh])
+
+            _min *= 0.9 if _min > 0 else 1.1
+            _max *= 1.1 if _max > 0 else 0.9
+
+            _levels = np.linspace(_min, _max, levels)
+
+            # Plot truth contour
+            c = axs[0, ii].tricontourf(nodes[:, 0], nodes[:, 1], truth[time_step, ii * Nh : (ii + 1) * Nh], levels=_levels, cmap=config["images"]["colormap"])
+            fig.colorbar(c, ax=axs[0, ii], orientation='vertical', shrink=0.8, format="%.2f")
+
+            # Plot prediction contours
+            for j, pred in enumerate(predictions):
+                c = axs[j + 1, ii].tricontourf(nodes[:, 0], nodes[:, 1], pred[time_step, ii * Nh : (ii + 1) * Nh], levels=_levels, cmap=config["images"]["colormap"])
+                fig.colorbar(c, ax=axs[j + 1, ii], orientation='vertical', shrink=0.8, format="%.2f")
+
+            # Set labels and title
+            axs[0, ii].set_title(f"Field {ii + 1}")
+            if ii == 0:
+                axs[0, ii].set_ylabel("Truth")
+                for j in range(len(predictions)):
+                    axs[j + 1, ii].set_ylabel(labels[j])
+
+        for ax in axs.flatten():
+            ax.set_xticks([])
+            ax.set_yticks([])
+
+        return fig
+
+def add_blanket_msfr(fig):
+    r"""
+    Add a white region for the blanket in the MSFR dataset to the given figure.
+    """
+
+    for ax in fig.get_axes():
+        rec = patches.Rectangle((1.13, -1.88/2), 0.7, 1.88, 
+                                            linewidth=1, facecolor='white', 
+                                            edgecolor='black', zorder=3) 
+        
+        ax.add_patch(rec)
