@@ -20,6 +20,7 @@ ctf4science.data\_module
       get_validation_prediction_timesteps
       get_validation_training_timesteps
       load_dataset
+      load_nodes
       load_validation_dataset
       parse_pair_ids
 

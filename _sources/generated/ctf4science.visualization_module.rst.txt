@@ -7,6 +7,13 @@ ctf4science.visualization\_module
 
 
 
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      add_blanket_msfr
+
 
 
    .. rubric:: Classes
