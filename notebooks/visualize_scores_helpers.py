@@ -446,6 +446,16 @@ def create_spider_plots(data, n_top_models=4, size=(10, 6), globals=None):
         legend_elements.append(line)
         legend_labels.append(model)
 
+    fig.legend(
+        legend_elements,
+        legend_labels,
+        loc="upper center",
+        bbox_to_anchor=(0.5, 1.10),
+        ncol=min(len(legend_labels), 4),
+        frameon=True,
+        fontsize="small",
+    )
+
     plt.savefig("spider_plots.pdf", dpi=NEURIPS_DPI, bbox_inches="tight")
     plt.show()
 
