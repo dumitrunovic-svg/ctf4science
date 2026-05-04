@@ -4,6 +4,7 @@ project-includes = [
 
 project-excludes = [
    "models/*",
+   "notebooks/*",
    "results/*",
    "data/*",
    "**/*.ipynb"

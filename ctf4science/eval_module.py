@@ -199,11 +199,15 @@ def compute_psd(array: np.ndarray, k: int, modes: int) -> np.ndarray:
     # Validate input parameters
     if k > time_steps:
         raise ValueError(f"k ({k}) exceeds time_steps ({time_steps})")
-    if modes > spatial_points:
-        raise ValueError(f"modes ({modes}) exceeds spatial_points ({spatial_points})")
 
     # Calculate the center index of the FFT-shifted spectrum
     center = spatial_points // 2
+    # After fftshift, only spatial_points - center bins are available from center onward
+    max_modes = spatial_points - center
+    if modes > max_modes:
+        raise ValueError(
+            f"modes ({modes}) exceeds available one-sided modes ({max_modes}) for spatial_points={spatial_points}"
+        )
 
     # Initialize array to accumulate the PSD sum
     psd_sum = np.zeros(modes)

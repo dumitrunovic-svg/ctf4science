@@ -455,10 +455,11 @@ def load_dataset(dataset_name: str, pair_id: int, transpose=False) -> tuple[list
 
     return train_data, initialization_data
 
+
 def load_nodes(dataset_name: str) -> np.ndarray:
     r"""Load the mesh/node information for a given dataset.
 
-    Reads the ``nodes.npy`` file located in the root directory of the 
+    Reads the ``nodes.npy`` file located in the root directory of the
     specified dataset.
 
     Parameters
@@ -477,8 +478,12 @@ def load_nodes(dataset_name: str) -> np.ndarray:
         If ``nodes.npy`` does not exist in the dataset folder.
     """
     node_file = top_dir / "data" / dataset_name / "nodes.npy"
-    
+    if not node_file.exists():
+        metadata = get_metadata(dataset_name)
+        if metadata.get("pod", False) and "original_dataset" in metadata:
+            node_file = top_dir / "data" / metadata["original_dataset"] / "nodes.npy"
     return _load_npy_file(node_file)
+
 
 def get_applicable_plots(dataset_name: str) -> list[str]:
     r"""Return the list of applicable visualization types for the given dataset.
@@ -538,6 +543,78 @@ def get_metadata(dataset_name: str) -> dict:
         raise ValueError(f"No metadata defined for dataset: {dataset_name}")
 
     return metadata
+
+
+def is_pod_dataset(dataset_name: str) -> bool:
+    r"""Return True if the dataset uses POD compression.
+
+    Checks the ``pod`` flag in the dataset metadata.
+
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset.
+
+    Returns
+    -------
+    bool
+        True if ``metadata.pod`` is set to true, False otherwise.
+    """
+    metadata = get_metadata(dataset_name)
+    return bool(metadata.get("pod", False))
+
+
+def load_pod_modes(dataset_name: str) -> tuple[np.ndarray, np.ndarray]:
+    r"""Load POD spatial modes from ``pod_modes.npz`` for the given dataset.
+
+    Reads the file named by ``metadata.pod_modes_file`` (default ``pod_modes.npz``)
+    in the dataset root directory.
+
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the POD dataset (e.g. ``'msfr_pod'``).
+
+    Returns
+    -------
+    Vt : ndarray, shape (r, D)
+        Right singular vectors (POD modes).
+    mu : ndarray, shape (D,)
+        Column-wise mean subtracted before SVD.
+
+    Raises
+    ------
+    FileNotFoundError
+        If ``pod_modes.npz`` does not exist in the dataset directory.
+    """
+    metadata = get_metadata(dataset_name)
+    modes_file = metadata.get("pod_modes_file", "pod_modes.npz")
+    modes_path = top_dir / "data" / dataset_name / modes_file
+    if not modes_path.exists():
+        raise FileNotFoundError(f"POD modes file not found: {modes_path}")
+    modes = np.load(modes_path)
+    return modes["Vt"].astype(np.float64), modes["mu"].astype(np.float64)
+
+
+def reconstruct_from_pod(dataset_name: str, pod_coeffs: np.ndarray) -> np.ndarray:
+    r"""Reconstruct full-space data from POD coefficients.
+
+    Applies the inverse POD transform: ``X = pod_coeffs @ Vt + mu``.
+
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the POD dataset (e.g. ``'msfr_pod'``).
+    pod_coeffs : ndarray, shape (N, r)
+        POD coefficient matrix (timesteps × modes).
+
+    Returns
+    -------
+    ndarray, shape (N, D)
+        Reconstructed data in the original full spatial dimension.
+    """
+    Vt, mu = load_pod_modes(dataset_name)
+    return (pod_coeffs.astype(np.float64) @ Vt + mu).astype(np.float32)
 
 
 def get_config(dataset_name: str) -> dict[str, Any]:

@@ -10,7 +10,7 @@ import numpy as np
 import yaml
 from matplotlib import colormaps, patches
 
-from ctf4science.data_module import _load_test_data, get_applicable_plots, load_nodes
+from ctf4science.data_module import _load_test_data, get_applicable_plots, load_nodes, reconstruct_from_pod
 from ctf4science.eval_module import compute_log_psd
 
 file_dir = Path(__file__).parent
@@ -382,8 +382,11 @@ class Visualization:
         time_steps, N = truth.shape
         if k > time_steps:
             raise ValueError(f"k ({k}) cannot exceed time_steps ({time_steps})")
-        if modes > N:
-            raise ValueError(f"modes ({modes}) cannot exceed spatial points ({N})")
+        max_modes = N - N // 2
+        if modes > max_modes:
+            raise ValueError(
+                f"modes ({modes}) cannot exceed available one-sided modes ({max_modes}) for spatial points ({N})"
+            )
         for pred in predictions:
             if pred.shape != truth.shape:
                 raise ValueError(f"Prediction shape {pred.shape} does not match truth shape {truth.shape}")
@@ -491,10 +494,21 @@ class Visualization:
             # Load nodes for contour plotting (e.g. for MSFR)
             nodes = load_nodes(dataset_name)
 
-            fig =  self.plot_2d_contours(nodes, test_data, predictions, num_fields, **kwargs)
+            # Reconstruct from POD to original space before contour plotting
+            metadata = dataset_config.get("metadata", {})
+            if metadata.get("pod", False):
+                original_dataset = metadata["original_dataset"]
+                plot_test_data = reconstruct_from_pod(dataset_name, test_data)
+                plot_predictions = [reconstruct_from_pod(dataset_name, p) for p in predictions]
+            else:
+                original_dataset = dataset_name
+                plot_test_data = test_data
+                plot_predictions = predictions
 
-            # Add blanket for MSFR
-            if dataset_name == "msfr":
+            fig = self.plot_2d_contours(nodes, plot_test_data, plot_predictions, num_fields, **kwargs)
+
+            # Add blanket for MSFR (including POD datasets derived from MSFR)
+            if original_dataset == "msfr":
                 add_blanket_msfr(fig)
 
             return fig
@@ -702,7 +716,7 @@ class Visualization:
                 if isinstance(ticks, (np.ndarray, list)):
                     cbar.set_ticks(ticks)  # type: ignore[arg-type]
                 elif isinstance(ticks, int):
-                    cbar.set_ticks(np.linspace(truth.min(), truth.max(), ticks))
+                    cbar.set_ticks(list(np.linspace(truth.min(), truth.max(), ticks)))
 
             label = cbar_options.get("label")
             if label:
@@ -736,7 +750,7 @@ class Visualization:
         for pred in predictions:
             if pred.shape != truth.shape:
                 raise ValueError(f"Prediction shape {pred.shape} does not match truth shape {truth.shape}")
-            
+
         labels = [f"Prediction {i + 1}" for i in range(len(predictions))]
 
         fig, axs = plt.subplots(num_fields, 1, figsize=config.get("figure_size", (num_fields * 6, 4)), sharex=True)
@@ -747,7 +761,9 @@ class Visualization:
         for ii in range(num_fields):
             ax = axs[ii] if num_fields > 1 else axs  # type: ignore[index]
             truth_avg = truth[:, ii * Nh : (ii + 1) * Nh].mean(axis=1)
-            ax.plot(time, truth_avg, label="Truth", color=config["colors"]["truth"], linestyle=config["linestyles"]["truth"])
+            ax.plot(
+                time, truth_avg, label="Truth", color=config["colors"]["truth"], linestyle=config["linestyles"]["truth"]
+            )
             for j, pred in enumerate(predictions):
                 pred_avg = pred[:, ii * Nh : (ii + 1) * Nh].mean(axis=1)
                 ax.plot(time, pred_avg, label=labels[j], color=colors[j], linestyle=config["linestyles"]["predictions"])
@@ -755,16 +771,14 @@ class Visualization:
             ax.legend()
 
         if num_fields > 1:
-            axs[-1].set_xlabel("Time") 
+            axs[-1].set_xlabel("Time")
         else:
             axs.set_xlabel("Time")  # type: ignore[union-attr]
 
         plt.tight_layout()
         return fig
-    
-    def plot_2d_contours(self, nodes, truth, predictions, num_fields, 
-                         time_step = -1, 
-                         levels = 30, **kwargs):
+
+    def plot_2d_contours(self, nodes, truth, predictions, num_fields, time_step=-1, levels=30, **kwargs):
         r"""
         Plot contour comparisons of truth and predictions for spatial fields.
 
@@ -793,7 +807,7 @@ class Visualization:
         for pred in predictions:
             if pred.shape != truth.shape:
                 raise ValueError(f"Prediction shape {pred.shape} does not match truth shape {truth.shape}")
-            
+
         labels = [f"Prediction {i + 1}" for i in range(len(predictions))]
 
         nrows = len(predictions) + 1  # one row for truth, one for each prediction
@@ -811,13 +825,25 @@ class Visualization:
             _levels = np.linspace(_min, _max, levels)
 
             # Plot truth contour
-            c = axs[0, ii].tricontourf(nodes[:, 0], nodes[:, 1], truth[time_step, ii * Nh : (ii + 1) * Nh], levels=_levels, cmap=config["images"]["colormap"])
-            fig.colorbar(c, ax=axs[0, ii], orientation='vertical', shrink=0.8, format="%.2f")
+            c = axs[0, ii].tricontourf(
+                nodes[:, 0],
+                nodes[:, 1],
+                truth[time_step, ii * Nh : (ii + 1) * Nh],
+                levels=_levels,
+                cmap=config["images"]["colormap"],
+            )
+            fig.colorbar(c, ax=axs[0, ii], orientation="vertical", shrink=0.8, format="%.2f")
 
             # Plot prediction contours
             for j, pred in enumerate(predictions):
-                c = axs[j + 1, ii].tricontourf(nodes[:, 0], nodes[:, 1], pred[time_step, ii * Nh : (ii + 1) * Nh], levels=_levels, cmap=config["images"]["colormap"])
-                fig.colorbar(c, ax=axs[j + 1, ii], orientation='vertical', shrink=0.8, format="%.2f")
+                c = axs[j + 1, ii].tricontourf(
+                    nodes[:, 0],
+                    nodes[:, 1],
+                    pred[time_step, ii * Nh : (ii + 1) * Nh],
+                    levels=_levels,
+                    cmap=config["images"]["colormap"],
+                )
+                fig.colorbar(c, ax=axs[j + 1, ii], orientation="vertical", shrink=0.8, format="%.2f")
 
             # Set labels and title
             axs[0, ii].set_title(f"Field {ii + 1}")
@@ -832,14 +858,15 @@ class Visualization:
 
         return fig
 
+
 def add_blanket_msfr(fig):
     r"""
     Add a white region for the blanket in the MSFR dataset to the given figure.
     """
 
     for ax in fig.get_axes():
-        rec = patches.Rectangle((1.13, -1.88/2), 0.7, 1.88, 
-                                            linewidth=1, facecolor='white', 
-                                            edgecolor='black', zorder=3) 
-        
+        rec = patches.Rectangle(
+            (1.13, -1.88 / 2), 0.7, 1.88, linewidth=1, facecolor="white", edgecolor="black", zorder=3
+        )
+
         ax.add_patch(rec)
